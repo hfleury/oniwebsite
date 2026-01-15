@@ -1,6 +1,7 @@
 
 import styled from "styled-components";
 import heroIllustrationSrc from "../assets/hero_illustration_dalmatian.png";
+import { useTranslation } from "../i18n";
 
 
 const Container = styled.div`
@@ -183,22 +184,23 @@ const IllustrationContainer = styled.div`
 `;
 
 export default function Hero() {
+  const { t } = useTranslation();
   return (
     <Container>
       <Content>
         <LeftColumn>
           <Heading>
-            Beautiful React Templates <span className="text-primary-500">for you.</span>
+            {t("hero_title_prefix")} <span className="text-primary-500">{t("hero_title_highlight")}</span>
           </Heading>
           <Paragraph>
-            Our templates are easy to setup, understand and customize. Fully modular components with a variety of pages and components.
+            {t("hero_description")}
           </Paragraph>
           <Actions>
-            <input type="email" placeholder="Your E-mail Address" />
-            <button>Get Started</button>
+            <input type="email" placeholder={t("hero_email_placeholder")} />
+            <button>{t("hero_cta_button")}</button>
           </Actions>
           <CustomersLogoStrip>
-            <p>Our Trusted Customers</p>
+            <p>{t("hero_trusted_customers")}</p>
             <div className="logos">
               {/* Placeholder for logos - implementing simple text/gray boxes for now or SVGs if time permits */}
               {/* Using text specific style for logos to simulate the look */}

@@ -1,6 +1,7 @@
 
 import styled from "styled-components";
 import { Facebook, Twitter, Instagram } from "lucide-react";
+import LanguageDropdown from "./LanguageDropdown";
 
 const Container = styled.div`
   position: relative;
@@ -218,11 +219,14 @@ export default function Footer() {
           <Copyright>
             &copy; 2026 Treact Inc. All Rights Reserved.
           </Copyright>
-          <SocialLinks>
-            <SocialLink href="https://facebook.com"><Facebook size={20} /></SocialLink>
-            <SocialLink href="https://twitter.com"><Twitter size={20} /></SocialLink>
-            <SocialLink href="https://instagram.com"><Instagram size={20} /></SocialLink>
-          </SocialLinks>
+          <div className="flex items-center mt-4 md:mt-0">
+            <LanguageDropdown className="mr-6 text-gray-900 bg-gray-100 rounded-full border-none" />
+            <SocialLinks style={{ marginTop: 0 }}>
+              <SocialLink href="https://facebook.com"><Facebook size={20} /></SocialLink>
+              <SocialLink href="https://twitter.com"><Twitter size={20} /></SocialLink>
+              <SocialLink href="https://instagram.com"><Instagram size={20} /></SocialLink>
+            </SocialLinks>
+          </div>
         </ThreeColBottom>
       </Content>
     </Container>

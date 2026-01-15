@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import styled from "styled-components";
 import logo from "../../images/logo_original.png";
+import { useTranslation } from "../../i18n";
+import LanguageDropdown from "../LanguageDropdown";
 
 // Styled Components for customizability matching Treact style
 const HeaderBase = styled.header`
@@ -39,16 +41,17 @@ const LogoLink = styled.a`
 `;
 
 export default function Header() {
+    const { t } = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
     const navLinks = [
-        <NavLink key="blog" href="#">Blog</NavLink>,
-        <NavLink key="features" href="#">Features</NavLink>,
-        <NavLink key="pricing" href="#">Pricing</NavLink>,
-        <NavLink key="login" href="#">Log In</NavLink>,
-        <PrimaryLink key="signup" href="#">Sign Up</PrimaryLink>
+        <NavLink key="blog" href="#">{t("nav_blog")}</NavLink>,
+        <NavLink key="features" href="#">{t("nav_features")}</NavLink>,
+        <NavLink key="pricing" href="#">{t("nav_pricing")}</NavLink>,
+        <NavLink key="login" href="#">{t("nav_login")}</NavLink>,
+        <PrimaryLink key="signup" href="#">{t("nav_signup")}</PrimaryLink>
     ];
 
     return (
@@ -69,6 +72,9 @@ export default function Header() {
             {/* Desktop Nav */}
             <nav className="hidden lg:flex flex-1 justify-end items-center">
                 {navLinks}
+                <div className="ml-6 border-l border-gray-200 pl-6">
+                    <LanguageDropdown />
+                </div>
             </nav>
 
             {/* Mobile Nav */}
@@ -95,6 +101,9 @@ export default function Header() {
                             <div className="px-5 pt-8 pb-6">
                                 <nav className="grid gap-y-4">
                                     {navLinks}
+                                    <div className="mt-4 pt-4 border-t border-gray-100 flex justify-center">
+                                        <LanguageDropdown />
+                                    </div>
                                 </nav>
                             </div>
                         </div>
