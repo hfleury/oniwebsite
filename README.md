@@ -1,73 +1,65 @@
-# React + TypeScript + Vite
+# Oni Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive SaaS landing page replica built for **Oni** with a custom harmonic color theme and personalized illustrations.
 
-Currently, two official plugins are available:
+## 🚀 Technologies Used
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project was built using the following technologies:
 
-## React Compiler
+-   **[React](https://reactjs.org/)**: A JavaScript library for building user interfaces.
+-   **[TypeScript](https://www.typescriptlang.org/)**: A typed superset of JavaScript that enhances code quality and maintainability.
+-   **[Vite](https://vitejs.dev/)**: Next Generation Frontend Tooling for fast development and building.
+-   **[Tailwind CSS](https://tailwindcss.com/)**: A utility-first CSS framework for rapid UI development.
+-   **[Styled Components](https://styled-components.com/)**: CSS-in-JS for component-level styling.
+-   **[Lucide React](https://lucide.dev/)**: Beautiful & consistent icon pack.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Key Features
 
-## Expanding the ESLint configuration
+### 1. Harmonic Color Theme
+The website features a custom color palette derived directly from the **Oni Logo**:
+-   **Primary Blue (`#17A1DA`)**: Used for main actions, buttons, and highlights.
+-   **Brand Green (`#063307`)**: Used for the footer background and trusted accents (Testimonials).
+-   **Brand Red (`#5D0303`)**: Used for high-contrast accents (Steps).
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 2. Custom Illustrations
+All illustrations have been customized to match the brand's harmonic color theme:
+-   **Hero**: A custom composition including the company's **Dalmatian** with logo-colored spots!
+-   **Quality Work**: Stylized in Primary Blue.
+-   **Steps**: Stylized in Brand Red.
+-   **Testimonials**: Stylized in Brand Green.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 3. Responsive Design
+The layout is fully responsive, ensuring a seamless experience on desktop, tablet, and mobile devices.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🛠️ Setup Instructions
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+To run this project locally, follow these steps:
+
+1.  **Clone the repository:**
+    ```bash
+    git clone <repository-url>
+    cd oniwebsite
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+
+4.  **Open your browser:**
+    Navigate to `http://localhost:5173/` to view the website.
+
+## 📦 Build for Production
+
+To create a production build:
+
+```bash
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+The output will be in the `dist` directory.
