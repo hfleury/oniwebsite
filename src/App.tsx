@@ -12,7 +12,7 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div className="font-sans antialiased text-gray-900 bg-white">
+    <div className="font-sans antialiased text-gray-900 bg-white min-h-screen flex flex-col">
       <Header />
       <Hero />
       <Features />
@@ -21,7 +21,9 @@ function App() {
       <Pricing />
       <Testimonials />
       <FAQ />
-      <Footer />
+      <div className="mt-auto w-full">
+        <Footer />
+      </div>
     </div>
   );
 }
