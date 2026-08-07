@@ -1,6 +1,7 @@
 
 import styled from "styled-components";
 import { Shield, Headphones, Sliders, Server, Zap, Smile } from "lucide-react";
+import { colors, breakpoints } from "../styles/tokens";
 
 const Container = styled.div`
   position: relative;
@@ -9,7 +10,7 @@ const Container = styled.div`
   border-radius: 12px;
   margin: 64px 32px;
   
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     padding: 80px 48px;
     margin: 80px 48px;
   }
@@ -27,7 +28,7 @@ const Subheading = styled.p`
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: #17A1DA;
+  color: ${colors.primary};
   font-size: 0.875rem;
   margin-bottom: 16px;
 `;
@@ -35,21 +36,21 @@ const Subheading = styled.p`
 const Heading = styled.h2`
   font-weight: 900;
   font-size: 2rem;
-  color: #1A202C;
+  color: ${colors.headingDark};
   
-  @media (min-width: 768px) {
+  @media (min-width: ${breakpoints.md}) {
     font-size: 3rem;
   }
   
   span {
-    color: #17A1DA;
+    color: ${colors.primary};
   }
 `;
 
 const Description = styled.p`
   margin-top: 16px;
   font-size: 1rem;
-  color: #718096;
+  color: ${colors.bodyMuted};
   max-width: 600px;
   line-height: 1.6;
 `;
@@ -61,7 +62,7 @@ const TwoColumnGrid = styled.div`
   margin-top: 48px;
   gap: 32px;
   
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     justify-content: space-between;
   }
 `;
@@ -69,10 +70,10 @@ const TwoColumnGrid = styled.div`
 const Column = styled.div`
   width: 100%;
   
-  @media (min-width: 768px) {
+  @media (min-width: ${breakpoints.md}) {
     width: calc(50% - 16px);
   }
-  @media (min-width: 1280px) {
+  @media (min-width: ${breakpoints.xl}) {
     width: calc(33.333% - 22px);
   }
 `;
@@ -85,7 +86,7 @@ const Card = styled.div`
   background-color: transparent;
   width: 100%;
   
-  @media (min-width: 640px) {
+  @media (min-width: ${breakpoints.sm}) {
     flex-direction: row;
     align-items: flex-start;
   }
@@ -96,11 +97,11 @@ const IconContainer = styled.span`
   display: inline-flex;
   margin-bottom: 16px;
   background-color: rgba(6, 51, 7, 0.1); /* Light Brand Green */
-  color: #063307; /* Brand Green */
+  color: ${colors.brandGreen};
   padding: 16px;
   border-radius: 9999px;
   
-  @media (min-width: 640px) {
+  @media (min-width: ${breakpoints.sm}) {
     margin-bottom: 0;
     margin-right: 16px;
   }
@@ -114,13 +115,13 @@ const Content = styled.div`
 const Title = styled.h4`
   font-weight: 700;
   font-size: 1.25rem;
-  color: #1A202C;
+  color: ${colors.headingDark};
   margin-bottom: 8px;
 `;
 
 const Text = styled.p`
   line-height: 1.6;
-  color: #718096;
+  color: ${colors.bodyMuted};
 `;
 
 export default function Features() {

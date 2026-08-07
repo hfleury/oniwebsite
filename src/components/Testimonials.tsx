@@ -2,12 +2,13 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Star, ArrowLeft, ArrowRight } from "lucide-react";
 import testimonialImageSrc from "../assets/testimonial_image_green.png";
+import { colors, breakpoints } from "../styles/tokens";
 
 const Container = styled.div`
   position: relative;
   padding: 80px 32px;
   
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     padding: 100px 48px;
   }
 `;
@@ -19,7 +20,7 @@ const Content = styled.div`
   flex-direction: column;
   align-items: center;
   
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     flex-direction: row;
     justify-content: space-between;
   }
@@ -29,7 +30,7 @@ const ImageColumn = styled.div`
   width: 100%;
   margin-bottom: 48px;
   
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     width: 50%;
     margin-bottom: 0;
     margin-right: 48px;
@@ -46,7 +47,7 @@ const TextColumn = styled.div`
   width: 100%;
   text-align: left;
   
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     width: 50%;
   }
 `;
@@ -55,7 +56,7 @@ const Subheading = styled.p`
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: #17A1DA;
+  color: ${colors.primary};
   font-size: 0.875rem;
   margin-bottom: 16px;
 `;
@@ -63,16 +64,16 @@ const Subheading = styled.p`
 const Heading = styled.h2`
   font-weight: 900;
   font-size: 2rem;
-  color: #1A202C;
+  color: ${colors.headingDark};
   line-height: 1.25;
   margin-bottom: 32px;
   
-  @media (min-width: 768px) {
+  @media (min-width: ${breakpoints.md}) {
     font-size: 3rem;
   }
   
   span {
-    color: #17A1DA;
+    color: ${colors.primary};
   }
 `;
 
@@ -89,7 +90,7 @@ const Stars = styled.div`
 const Quote = styled.h4`
   font-weight: 700;
   font-size: 1.125rem;
-  color: #1A202C;
+  color: ${colors.headingDark};
   margin-bottom: 12px;
   line-height: 1.5;
 `;
@@ -97,7 +98,7 @@ const Quote = styled.h4`
 const QuoteText = styled.p`
   font-size: 1rem;
   line-height: 1.6;
-  color: #718096;
+  color: ${colors.bodyMuted};
   margin-bottom: 24px;
 `;
 
@@ -115,12 +116,12 @@ const CustomerInfo = styled.div`
 const CustomerName = styled.span`
   font-weight: 700;
   font-size: 1.125rem;
-  color: #1A202C;
+  color: ${colors.headingDark};
 `;
 
 const CustomerTitle = styled.span`
   font-size: 0.875rem;
-  color: #718096;
+  color: ${colors.bodyMuted};
   font-weight: 500;
 `;
 

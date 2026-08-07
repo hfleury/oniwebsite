@@ -1,12 +1,13 @@
 
 import styled from "styled-components";
 import stepsIllustrationSrc from "../assets/steps_illustration_red.png";
+import { colors, breakpoints } from "../styles/tokens";
 
 const Container = styled.div`
   position: relative;
   padding: 80px 32px;
   
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     padding: 100px 48px;
   }
 `;
@@ -18,7 +19,7 @@ const Content = styled.div`
   flex-direction: column;
   align-items: center;
   
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     flex-direction: row-reverse; /* Image on right? Actually screenshot shows "Easy to Get Started" usually has image on Right? Let's check logic. MainFeature was Image Left. This should alternate. So Image Right. */
     justify-content: space-between;
   }
@@ -28,7 +29,7 @@ const ImageColumn = styled.div`
   width: 100%;
   margin-bottom: 48px;
   
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     width: 50%;
     margin-bottom: 0;
     margin-left: 48px;
@@ -45,7 +46,7 @@ const TextColumn = styled.div`
   width: 100%;
   text-align: left;
   
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     width: 50%;
   }
 `;
@@ -54,7 +55,7 @@ const Subheading = styled.p`
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: #17A1DA;
+  color: ${colors.primary};
   font-size: 0.875rem;
   margin-bottom: 16px;
 `;
@@ -62,16 +63,16 @@ const Subheading = styled.p`
 const Heading = styled.h2`
   font-weight: 900;
   font-size: 2rem;
-  color: #1A202C;
+  color: ${colors.headingDark};
   line-height: 1.25;
   margin-bottom: 32px;
   
-  @media (min-width: 768px) {
+  @media (min-width: ${breakpoints.md}) {
     font-size: 3rem;
   }
   
   span {
-    color: #17A1DA;
+    color: ${colors.primary};
   }
 `;
 
@@ -103,14 +104,14 @@ const StepContent = styled.div`
 const StepTitle = styled.h5`
   font-weight: 700;
   font-size: 1.25rem;
-  color: #1A202C;
+  color: ${colors.headingDark};
   margin-bottom: 8px;
 `;
 
 const StepText = styled.p`
   font-size: 0.875rem;
   line-height: 1.6;
-  color: #718096;
+  color: ${colors.bodyMuted};
 `;
 
 export default function Steps() {

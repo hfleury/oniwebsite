@@ -1,12 +1,13 @@
 
 import styled from "styled-components";
 import teamIllustrationSrc from "../assets/team_illustration_blue.png";
+import { colors, breakpoints } from "../styles/tokens";
 
 const Container = styled.div`
   position: relative;
   padding: 80px 32px;
   
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     padding: 100px 48px;
   }
 `;
@@ -18,7 +19,7 @@ const Content = styled.div`
   flex-direction: column;
   align-items: center;
   
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     flex-direction: row;
     justify-content: space-between;
   }
@@ -28,7 +29,7 @@ const ImageColumn = styled.div`
   width: 100%;
   margin-bottom: 48px;
   
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     width: 50%;
     margin-bottom: 0;
     margin-right: 48px;
@@ -45,7 +46,7 @@ const TextColumn = styled.div`
   width: 100%;
   text-align: center;
   
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     width: 50%;
     text-align: left;
   }
@@ -55,7 +56,7 @@ const Subheading = styled.p`
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: #17A1DA;
+  color: ${colors.primary};
   font-size: 0.875rem;
   margin-bottom: 16px;
 `;
@@ -63,15 +64,15 @@ const Subheading = styled.p`
 const Heading = styled.h2`
   font-weight: 900;
   font-size: 2rem;
-  color: #1A202C;
+  color: ${colors.headingDark};
   line-height: 1.25;
   
-  @media (min-width: 768px) {
+  @media (min-width: ${breakpoints.md}) {
     font-size: 3rem;
   }
   
   span {
-    color: #17A1DA;
+    color: ${colors.primary};
   }
 `;
 
@@ -79,16 +80,16 @@ const Description = styled.p`
   margin-top: 24px;
   font-size: 1rem;
   line-height: 1.625;
-  color: #718096;
+  color: ${colors.bodyMuted};
   
-  @media (min-width: 768px) {
+  @media (min-width: ${breakpoints.md}) {
     font-size: 1.125rem;
   }
 `;
 
 const PrimaryButton = styled.button`
   margin-top: 32px;
-  background-color: #17A1DA;
+  background-color: ${colors.primary};
   color: white;
   font-weight: 700;
   padding: 12px 32px;
@@ -108,7 +109,7 @@ const StatGrid = styled.div`
   margin-top: 32px;
   justify-content: center;
   
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     justify-content: flex-start;
   }
 `;
@@ -120,12 +121,12 @@ const Stat = styled.div`
   .value {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #1A202C;
+    color: ${colors.headingDark};
   }
   .key {
     font-size: 0.875rem;
     font-weight: 600;
-    color: #718096;
+    color: ${colors.bodyMuted};
     margin-top: 4px;
   }
 `;

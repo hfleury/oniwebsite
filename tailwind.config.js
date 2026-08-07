@@ -5,6 +5,15 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    // Kept in sync with src/styles/tokens.ts's `breakpoints` export — both intentionally
+    // match Tailwind's own unmodified defaults, made explicit here so a future change to
+    // one doesn't silently drift from the other.
+    screens: {
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+    },
     extend: {
       colors: {
         primary: {

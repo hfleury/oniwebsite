@@ -2,13 +2,14 @@ import { useState } from "react";
 import styled from "styled-components";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { colors, breakpoints } from "../styles/tokens";
 
 const Container = styled.div`
   position: relative;
   padding: 64px 32px;
   background-color: transparent; /* Treact often uses curve background or plain */
   
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     padding: 80px 48px;
   }
 `;
@@ -25,7 +26,7 @@ const Subheading = styled.p`
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: #17A1DA;
+  color: ${colors.primary};
   font-size: 0.875rem;
   margin-bottom: 16px;
   text-align: center;
@@ -34,17 +35,17 @@ const Subheading = styled.p`
 const Heading = styled.h2`
   font-weight: 900;
   font-size: 2rem;
-  color: #1A202C;
+  color: ${colors.headingDark};
   line-height: 1.25;
   margin-bottom: 48px;
   text-align: center;
   
-  @media (min-width: 768px) {
+  @media (min-width: ${breakpoints.md}) {
     font-size: 3rem;
   }
   
   span {
-    color: #17A1DA;
+    color: ${colors.primary};
   }
 `;
 
@@ -78,7 +79,7 @@ const QuestionText = styled.span`
 `;
 
 const Answer = styled(motion.div)`
-  color: #718096;
+  color: ${colors.bodyMuted};
   margin-top: 16px;
   line-height: 1.6;
   font-size: 1rem;

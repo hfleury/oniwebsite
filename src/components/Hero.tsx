@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import heroIllustrationSrc from "../assets/hero_illustration_dalmatian.png";
 import { useTranslation } from "../i18n";
+import { colors, breakpoints } from "../styles/tokens";
 
 
 const Container = styled.div`
@@ -18,7 +19,7 @@ const Content = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     flex-direction: row;
     justify-content: space-between;
     padding-top: 80px;
@@ -30,7 +31,7 @@ const LeftColumn = styled.div`
   text-align: center;
   margin-top: 48px;
   
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     width: 50%;
     text-align: left;
     margin-top: 0;
@@ -41,7 +42,7 @@ const RightColumn = styled.div`
   width: 100%;
   position: relative;
   
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     width: 50%;
   }
 `;
@@ -50,18 +51,18 @@ const Heading = styled.h1`
   font-weight: 900;
   font-size: 2.5rem; /* 4xl */
   line-height: 1.25;
-  color: #1A202C; /* Gray-900 */
+  color: ${colors.headingDark};
   
-  @media (min-width: 768px) {
+  @media (min-width: ${breakpoints.md}) {
     font-size: 3rem; /* 5xl */
   }
   
-  @media (min-width: 1280px) {
+  @media (min-width: ${breakpoints.xl}) {
     font-size: 3.75rem; /* 6xl */
   }
 
   span {
-    color: #17A1DA; /* Primary-500 */
+    color: ${colors.primary};
   }
 `;
 
@@ -69,13 +70,13 @@ const Paragraph = styled.p`
   margin-top: 24px;
   font-size: 1rem;
   line-height: 1.625;
-  color: #718096; /* Gray-600 */
+  color: ${colors.bodyMuted};
   
-  @media (min-width: 768px) {
+  @media (min-width: ${breakpoints.md}) {
     font-size: 1.125rem; /* lg */
   }
   
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     max-width: 500px;
   }
 `;
@@ -86,12 +87,12 @@ const Actions = styled.div`
   flex-direction: column;
   align-items: center;
   
-  @media (min-width: 640px) {
+  @media (min-width: ${breakpoints.sm}) {
     flex-direction: row;
     justify-content: center;
   }
   
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     justify-content: flex-start;
   }
 
@@ -107,7 +108,7 @@ const Actions = styled.div`
 
     &:focus {
       outline: none;
-      border-color: #17A1DA;
+      border-color: ${colors.primary};
     }
     
     &:hover {
@@ -119,7 +120,7 @@ const Actions = styled.div`
     margin-top: 16px;
     width: 100%;
     max-width: 300px;
-    background-color: #17A1DA;
+    background-color: ${colors.primary};
     color: white;
     font-weight: 700;
     padding: 12px 32px;
@@ -133,7 +134,7 @@ const Actions = styled.div`
       box-shadow: 0 10px 15px -3px rgba(23, 161, 218, 0.2), 0 4px 6px -2px rgba(23, 161, 218, 0.1);
     }
 
-    @media (min-width: 640px) {
+    @media (min-width: ${breakpoints.sm}) {
       margin-top: 0;
       margin-left: 16px;
       width: auto;
@@ -152,7 +153,7 @@ const CustomersLogoStrip = styled.div`
     color: #A0AEC0;
     text-align: center;
     
-    @media (min-width: 1024px) {
+    @media (min-width: ${breakpoints.lg}) {
       text-align: left;
     }
   }
@@ -165,7 +166,7 @@ const CustomersLogoStrip = styled.div`
     flex-wrap: wrap;
     opacity: 0.5;
     
-    @media (min-width: 1024px) {
+    @media (min-width: ${breakpoints.lg}) {
       justify-content: flex-start;
     }
 
