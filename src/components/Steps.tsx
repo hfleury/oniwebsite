@@ -2,28 +2,8 @@
 import styled from "styled-components";
 import stepsIllustrationSrc from "../assets/steps_illustration_red.png";
 import { colors, breakpoints } from "../styles/tokens";
-
-const Container = styled.div`
-  position: relative;
-  padding: 80px 32px;
-  
-  @media (min-width: ${breakpoints.lg}) {
-    padding: 100px 48px;
-  }
-`;
-
-const Content = styled.div`
-  max-width: 1280px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  
-  @media (min-width: ${breakpoints.lg}) {
-    flex-direction: row-reverse; /* Image on right? Actually screenshot shows "Easy to Get Started" usually has image on Right? Let's check logic. MainFeature was Image Left. This should alternate. So Image Right. */
-    justify-content: space-between;
-  }
-`;
+import { Container, SplitContent } from "./ui/Section";
+import { Subheading, Heading } from "./ui/SectionHeading";
 
 const ImageColumn = styled.div`
   width: 100%;
@@ -48,31 +28,6 @@ const TextColumn = styled.div`
   
   @media (min-width: ${breakpoints.lg}) {
     width: 50%;
-  }
-`;
-
-const Subheading = styled.p`
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: ${colors.primary};
-  font-size: 0.875rem;
-  margin-bottom: 16px;
-`;
-
-const Heading = styled.h2`
-  font-weight: 900;
-  font-size: 2rem;
-  color: ${colors.headingDark};
-  line-height: 1.25;
-  margin-bottom: 32px;
-  
-  @media (min-width: ${breakpoints.md}) {
-    font-size: 3rem;
-  }
-  
-  span {
-    color: ${colors.primary};
   }
 `;
 
@@ -132,14 +87,15 @@ export default function Steps() {
 
   return (
     <Container>
-      <Content>
+      {/* $reverse: alternates the image to the right, since MainFeature (the section above) puts it on the left */}
+      <SplitContent $reverse>
         <ImageColumn>
           {/* Imported Image */}
           <img src={stepsIllustrationSrc} alt="Steps to get started" />
         </ImageColumn>
         <TextColumn>
           <Subheading>STEPS</Subheading>
-          <Heading>Easy to <span className="text-primary-500">Get Started.</span></Heading>
+          <Heading $lineHeight="1.25" $marginBottom="32px">Easy to <span className="text-primary-500">Get Started.</span></Heading>
           <StepList>
             {steps.map((step, index) => (
               <Step key={index}>
@@ -152,7 +108,7 @@ export default function Steps() {
             ))}
           </StepList>
         </TextColumn>
-      </Content>
+      </SplitContent>
     </Container>
   );
 }

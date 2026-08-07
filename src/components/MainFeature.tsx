@@ -2,28 +2,9 @@
 import styled from "styled-components";
 import teamIllustrationSrc from "../assets/team_illustration_blue.png";
 import { colors, breakpoints } from "../styles/tokens";
-
-const Container = styled.div`
-  position: relative;
-  padding: 80px 32px;
-  
-  @media (min-width: ${breakpoints.lg}) {
-    padding: 100px 48px;
-  }
-`;
-
-const Content = styled.div`
-  max-width: 1280px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  
-  @media (min-width: ${breakpoints.lg}) {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-`;
+import { Container, SplitContent } from "./ui/Section";
+import { Subheading, Heading } from "./ui/SectionHeading";
+import { Button } from "./ui/Button";
 
 const ImageColumn = styled.div`
   width: 100%;
@@ -52,30 +33,6 @@ const TextColumn = styled.div`
   }
 `;
 
-const Subheading = styled.p`
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: ${colors.primary};
-  font-size: 0.875rem;
-  margin-bottom: 16px;
-`;
-
-const Heading = styled.h2`
-  font-weight: 900;
-  font-size: 2rem;
-  color: ${colors.headingDark};
-  line-height: 1.25;
-  
-  @media (min-width: ${breakpoints.md}) {
-    font-size: 3rem;
-  }
-  
-  span {
-    color: ${colors.primary};
-  }
-`;
-
 const Description = styled.p`
   margin-top: 24px;
   font-size: 1rem;
@@ -87,21 +44,8 @@ const Description = styled.p`
   }
 `;
 
-const PrimaryButton = styled.button`
+const PrimaryButton = styled(Button)`
   margin-top: 32px;
-  background-color: ${colors.primary};
-  color: white;
-  font-weight: 700;
-  padding: 12px 32px;
-  border-radius: 9999px;
-  transition: all 0.3s;
-  box-shadow: 0 4px 6px -1px rgba(23, 161, 218, 0.1);
-
-  &:hover {
-    background-color: #0e81b3;
-    transform: translateY(-1px);
-    box-shadow: 0 10px 15px -3px rgba(23, 161, 218, 0.2);
-  }
 `;
 
 const StatGrid = styled.div`
@@ -134,14 +78,14 @@ const Stat = styled.div`
 export default function MainFeature() {
   return (
     <Container>
-      <Content>
+      <SplitContent>
         <ImageColumn>
           {/* Using imported image */}
           <img src={teamIllustrationSrc} alt="Team and Quality Work" />
         </ImageColumn>
         <TextColumn>
           <Subheading>QUALITY WORK</Subheading>
-          <Heading>Designed & Developed by <span className="text-primary-500">Professionals.</span></Heading>
+          <Heading $lineHeight="1.25">Designed & Developed by <span className="text-primary-500">Professionals.</span></Heading>
           <Description>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </Description>
@@ -159,9 +103,14 @@ export default function MainFeature() {
               <div className="key">Awards</div>
             </Stat>
           </StatGrid>
-          <PrimaryButton>Learn More</PrimaryButton>
+          <PrimaryButton
+            $shadow="0 4px 6px -1px rgba(23, 161, 218, 0.1)"
+            $hoverShadow="0 10px 15px -3px rgba(23, 161, 218, 0.2)"
+          >
+            Learn More
+          </PrimaryButton>
         </TextColumn>
-      </Content>
+      </SplitContent>
     </Container>
   );
 }

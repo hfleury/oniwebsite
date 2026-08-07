@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import { Shield, Headphones, Sliders, Server, Zap, Smile } from "lucide-react";
 import { colors, breakpoints } from "../styles/tokens";
+import { Subheading, Heading } from "./ui/SectionHeading";
 
 const Container = styled.div`
   position: relative;
@@ -22,29 +23,6 @@ const HeaderRow = styled.div`
   align-items: center;
   flex-direction: column;
   text-align: center;
-`;
-
-const Subheading = styled.p`
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: ${colors.primary};
-  font-size: 0.875rem;
-  margin-bottom: 16px;
-`;
-
-const Heading = styled.h2`
-  font-weight: 900;
-  font-size: 2rem;
-  color: ${colors.headingDark};
-  
-  @media (min-width: ${breakpoints.md}) {
-    font-size: 3rem;
-  }
-  
-  span {
-    color: ${colors.primary};
-  }
 `;
 
 const Description = styled.p`

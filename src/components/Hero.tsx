@@ -3,6 +3,7 @@ import styled from "styled-components";
 import heroIllustrationSrc from "../assets/hero_illustration_dalmatian.png";
 import { useTranslation } from "../i18n";
 import { colors, breakpoints } from "../styles/tokens";
+import { Button } from "./ui/Button";
 
 
 const Container = styled.div`
@@ -120,19 +121,6 @@ const Actions = styled.div`
     margin-top: 16px;
     width: 100%;
     max-width: 300px;
-    background-color: ${colors.primary};
-    color: white;
-    font-weight: 700;
-    padding: 12px 32px;
-    border-radius: 9999px;
-    transition: all 0.3s;
-    box-shadow: 0 4px 6px -1px rgba(23, 161, 218, 0.1), 0 2px 4px -1px rgba(23, 161, 218, 0.06);
-
-    &:hover {
-      background-color: #0e81b3;
-      transform: translateY(-1px);
-      box-shadow: 0 10px 15px -3px rgba(23, 161, 218, 0.2), 0 4px 6px -2px rgba(23, 161, 218, 0.1);
-    }
 
     @media (min-width: ${breakpoints.sm}) {
       margin-top: 0;
@@ -198,7 +186,12 @@ export default function Hero() {
           </Paragraph>
           <Actions>
             <input type="email" placeholder={t("hero_email_placeholder")} />
-            <button>{t("hero_cta_button")}</button>
+            <Button
+              $shadow="0 4px 6px -1px rgba(23, 161, 218, 0.1), 0 2px 4px -1px rgba(23, 161, 218, 0.06)"
+              $hoverShadow="0 10px 15px -3px rgba(23, 161, 218, 0.2), 0 4px 6px -2px rgba(23, 161, 218, 0.1)"
+            >
+              {t("hero_cta_button")}
+            </Button>
           </Actions>
           <CustomersLogoStrip>
             <p>{t("hero_trusted_customers")}</p>

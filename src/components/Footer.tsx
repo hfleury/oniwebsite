@@ -3,17 +3,14 @@ import styled from "styled-components";
 import { Facebook, Twitter, Instagram } from "lucide-react";
 import LanguageDropdown from "./LanguageDropdown";
 import { colors, breakpoints } from "../styles/tokens";
+import { Container as BaseContainer } from "./ui/Section";
 
-const Container = styled.div`
-  position: relative;
-  padding: 80px 32px 32px 32px;
-  background-color: ${colors.brandGreen};
-  color: #EDF2F7;
-  
-  @media (min-width: ${breakpoints.lg}) {
-    padding: 100px 48px 32px 48px;
-  }
-`;
+const Container = styled(BaseContainer).attrs({
+  $padding: '80px 32px 32px 32px',
+  $paddingLg: '100px 48px 32px 48px',
+  $background: colors.brandGreen,
+  $color: '#EDF2F7',
+})``;
 
 const Content = styled.div`
   max-width: 1280px;

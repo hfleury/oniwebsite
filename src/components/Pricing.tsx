@@ -1,47 +1,16 @@
 
 import styled from "styled-components";
 import { colors, breakpoints } from "../styles/tokens";
+import { Container as BaseContainer } from "./ui/Section";
+import { Subheading, Heading } from "./ui/SectionHeading";
+import { Button } from "./ui/Button";
 
-
-const Container = styled.div`
-  position: relative;
-  padding: 80px 32px;
-  background-color: #F7FAFC; /* Gray-100 */
-  
-  @media (min-width: ${breakpoints.lg}) {
-    padding: 100px 48px;
-  }
-`;
+const Container = styled(BaseContainer).attrs({ $background: '#F7FAFC' })``;
 
 const Content = styled.div`
   max-width: 1280px;
   margin: 0 auto;
   text-align: center;
-`;
-
-const Subheading = styled.p`
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: ${colors.primary};
-  font-size: 0.875rem;
-  margin-bottom: 16px;
-`;
-
-const Heading = styled.h2`
-  font-weight: 900;
-  font-size: 2rem;
-  color: ${colors.headingDark};
-  line-height: 1.25;
-  margin-bottom: 24px;
-  
-  @media (min-width: ${breakpoints.md}) {
-    font-size: 3rem;
-  }
-  
-  span {
-    color: ${colors.primary};
-  }
 `;
 
 const Description = styled.p`
@@ -146,30 +115,9 @@ const Feature = styled.div<{ $featured?: boolean }>`
   align-items: center;
 `;
 
-const PlanAction = styled.button<{ $featured?: boolean }>`
+const PlanAction = styled(Button)`
   width: 100%;
   margin-top: 32px;
-  padding: 16px;
-  border-radius: 9999px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  transition: all 0.3s;
-  
-  ${props => props.$featured ? `
-    background-color: white;
-    color: ${colors.brandGreen};
-    &:hover {
-      background-color: #f7fafc;
-    }
-  ` : `
-    background-color: linear-gradient(135deg, rgb(23, 161, 218) 0%, rgb(15, 104, 145) 100%);
-    background: linear-gradient(135deg, rgb(23, 161, 218) 0%, rgb(15, 104, 145) 100%);
-    color: white;
-    &:hover {
-      box-shadow: 0 10px 15px -3px rgba(23, 161, 218, 0.2);
-    }
-  `}
 `;
 
 export default function Pricing() {
@@ -198,7 +146,7 @@ export default function Pricing() {
     <Container>
       <Content>
         <Subheading>PRICING</Subheading>
-        <Heading>Reasonable & Flexible <span className="text-primary-500">Plans.</span></Heading>
+        <Heading $lineHeight="1.25" $marginBottom="24px">Reasonable & Flexible <span className="text-primary-500">Plans.</span></Heading>
         <Description>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </Description>
@@ -219,7 +167,12 @@ export default function Pricing() {
                   </Feature>
                 ))}
               </FeatureList>
-              <PlanAction $featured={plan.featured}>
+              <PlanAction
+                $variant={plan.featured ? 'featured' : 'gradient'}
+                $padding="16px"
+                $uppercase
+                $letterSpacing="0.05em"
+              >
                 Buy Now
               </PlanAction>
             </PlanCard>
