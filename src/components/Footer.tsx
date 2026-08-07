@@ -2,14 +2,15 @@
 import styled from "styled-components";
 import { Facebook, Twitter, Instagram } from "lucide-react";
 import LanguageDropdown from "./LanguageDropdown";
+import { colors, breakpoints } from "../styles/tokens";
 
 const Container = styled.div`
   position: relative;
   padding: 80px 32px 32px 32px;
-  background-color: #063307;
+  background-color: ${colors.brandGreen};
   color: #EDF2F7;
   
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     padding: 100px 48px 32px 48px;
   }
 `;
@@ -30,18 +31,18 @@ const Column = styled.div`
   width: 100%;
   margin-bottom: 48px;
   
-  @media (min-width: 640px) {
+  @media (min-width: ${breakpoints.sm}) {
     width: calc(50% - 24px);
   }
   
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     width: calc(20% - 24px);
     margin-bottom: 0;
   }
 `;
 
 const WideColumn = styled(Column)`
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     width: 30%;
   }
 `;
@@ -113,7 +114,7 @@ const ThreeColBottom = styled.div`
   justify-content: center;
   align-items: center;
   
-  @media (min-width: 768px) {
+  @media (min-width: ${breakpoints.md}) {
     flex-direction: row;
     justify-content: space-between;
   }
@@ -130,7 +131,7 @@ const Copyright = styled.p`
   margin-top: 24px;
   text-align: center;
   
-  @media (min-width: 768px) {
+  @media (min-width: ${breakpoints.md}) {
     margin-top: 0;
   }
 `;
@@ -139,7 +140,7 @@ const SocialLinks = styled.div`
   display: flex;
   margin-top: 24px;
   
-  @media (min-width: 768px) {
+  @media (min-width: ${breakpoints.md}) {
     margin-top: 0;
   }
 `;
@@ -147,7 +148,7 @@ const SocialLinks = styled.div`
 const SocialLink = styled.a`
   cursor: pointer;
   background-color: #F7FAFC;
-  color: #1A202C;
+  color: ${colors.headingDark};
   border-radius: 9999px;
   padding: 8px;
   margin-right: 16px;
@@ -157,7 +158,7 @@ const SocialLink = styled.a`
   
   &:hover {
     background-color: #EDF2F7;
-    color: #17A1DA;
+    color: ${colors.primary};
   }
 `;
 

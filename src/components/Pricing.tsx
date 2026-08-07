@@ -1,5 +1,6 @@
 
 import styled from "styled-components";
+import { colors, breakpoints } from "../styles/tokens";
 
 
 const Container = styled.div`
@@ -7,7 +8,7 @@ const Container = styled.div`
   padding: 80px 32px;
   background-color: #F7FAFC; /* Gray-100 */
   
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     padding: 100px 48px;
   }
 `;
@@ -22,7 +23,7 @@ const Subheading = styled.p`
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: #17A1DA;
+  color: ${colors.primary};
   font-size: 0.875rem;
   margin-bottom: 16px;
 `;
@@ -30,27 +31,27 @@ const Subheading = styled.p`
 const Heading = styled.h2`
   font-weight: 900;
   font-size: 2rem;
-  color: #1A202C;
+  color: ${colors.headingDark};
   line-height: 1.25;
   margin-bottom: 24px;
   
-  @media (min-width: 768px) {
+  @media (min-width: ${breakpoints.md}) {
     font-size: 3rem;
   }
   
   span {
-    color: #17A1DA;
+    color: ${colors.primary};
   }
 `;
 
 const Description = styled.p`
   font-size: 1rem;
   line-height: 1.625;
-  color: #718096;
+  color: ${colors.bodyMuted};
   max-width: 600px;
   margin: 0 auto 64px auto;
   
-  @media (min-width: 768px) {
+  @media (min-width: ${breakpoints.md}) {
     font-size: 1.125rem;
   }
 `;
@@ -62,7 +63,7 @@ const PlansContainer = styled.div`
   align-items: center;
   gap: 32px;
   
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     flex-direction: row;
     align-items: stretch;
   }
@@ -90,7 +91,7 @@ const PlanCard = styled.div<{ $featured?: boolean }>`
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   `}
 
-  @media (min-width: 1024px) {
+  @media (min-width: ${breakpoints.lg}) {
     ${props => !props.$featured && `
       margin-top: 24px;
       margin-bottom: 24px;
@@ -109,14 +110,14 @@ const PlanName = styled.span<{ $featured?: boolean }>`
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: ${props => props.$featured ? 'white' : '#1A202C'};
+  color: ${props => props.$featured ? 'white' : colors.headingDark};
   font-size: 1.25rem;
 `;
 
 const PlanPrice = styled.span<{ $featured?: boolean }>`
   font-weight: 700;
   font-size: 3rem;
-  color: ${props => props.$featured ? 'white' : '#1A202C'};
+  color: ${props => props.$featured ? 'white' : colors.headingDark};
   margin: 16px 0;
 `;
 
@@ -140,7 +141,7 @@ const FeatureList = styled.div`
 const Feature = styled.div<{ $featured?: boolean }>`
   margin-bottom: 20px;
   font-weight: 500;
-  color: ${props => props.$featured ? 'rgba(255,255,255,0.9)' : '#718096'};
+  color: ${props => props.$featured ? 'rgba(255,255,255,0.9)' : colors.bodyMuted};
   display: flex;
   align-items: center;
 `;
@@ -157,7 +158,7 @@ const PlanAction = styled.button<{ $featured?: boolean }>`
   
   ${props => props.$featured ? `
     background-color: white;
-    color: #063307;
+    color: ${colors.brandGreen};
     &:hover {
       background-color: #f7fafc;
     }
