@@ -2,17 +2,14 @@ import { useState } from "react";
 import styled from "styled-components";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { colors, breakpoints } from "../styles/tokens";
+import { colors } from "../styles/tokens";
+import { Container as BaseContainer } from "./ui/Section";
+import { Subheading, Heading } from "./ui/SectionHeading";
 
-const Container = styled.div`
-  position: relative;
-  padding: 64px 32px;
-  background-color: transparent; /* Treact often uses curve background or plain */
-  
-  @media (min-width: ${breakpoints.lg}) {
-    padding: 80px 48px;
-  }
-`;
+const Container = styled(BaseContainer).attrs({
+  $padding: '64px 32px',
+  $paddingLg: '80px 48px',
+})``;
 
 const Content = styled.div`
   max-width: 900px;
@@ -20,33 +17,6 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const Subheading = styled.p`
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: ${colors.primary};
-  font-size: 0.875rem;
-  margin-bottom: 16px;
-  text-align: center;
-`;
-
-const Heading = styled.h2`
-  font-weight: 900;
-  font-size: 2rem;
-  color: ${colors.headingDark};
-  line-height: 1.25;
-  margin-bottom: 48px;
-  text-align: center;
-  
-  @media (min-width: ${breakpoints.md}) {
-    font-size: 3rem;
-  }
-  
-  span {
-    color: ${colors.primary};
-  }
 `;
 
 const FAQList = styled.div`
@@ -135,8 +105,8 @@ export default function FAQ() {
   return (
     <Container>
       <Content>
-        <Subheading>FAQS</Subheading>
-        <Heading>You have <span className="text-primary-500">Questions?</span></Heading>
+        <Subheading $textAlign="center">FAQS</Subheading>
+        <Heading $lineHeight="1.25" $marginBottom="48px" $textAlign="center">You have <span className="text-primary-500">Questions?</span></Heading>
         <FAQList>
           {faqs.map((faq, i) => (
             <QAItem key={i} q={faq.q} a={faq.a} />

@@ -3,28 +3,8 @@ import styled from "styled-components";
 import { Star, ArrowLeft, ArrowRight } from "lucide-react";
 import testimonialImageSrc from "../assets/testimonial_image_green.png";
 import { colors, breakpoints } from "../styles/tokens";
-
-const Container = styled.div`
-  position: relative;
-  padding: 80px 32px;
-  
-  @media (min-width: ${breakpoints.lg}) {
-    padding: 100px 48px;
-  }
-`;
-
-const Content = styled.div`
-  max-width: 1280px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  
-  @media (min-width: ${breakpoints.lg}) {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-`;
+import { Container, SplitContent } from "./ui/Section";
+import { Subheading, Heading } from "./ui/SectionHeading";
 
 const ImageColumn = styled.div`
   width: 100%;
@@ -49,31 +29,6 @@ const TextColumn = styled.div`
   
   @media (min-width: ${breakpoints.lg}) {
     width: 50%;
-  }
-`;
-
-const Subheading = styled.p`
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: ${colors.primary};
-  font-size: 0.875rem;
-  margin-bottom: 16px;
-`;
-
-const Heading = styled.h2`
-  font-weight: 900;
-  font-size: 2rem;
-  color: ${colors.headingDark};
-  line-height: 1.25;
-  margin-bottom: 32px;
-  
-  @media (min-width: ${breakpoints.md}) {
-    font-size: 3rem;
-  }
-  
-  span {
-    color: ${colors.primary};
   }
 `;
 
@@ -170,14 +125,14 @@ export default function Testimonials() {
 
   return (
     <Container>
-      <Content>
+      <SplitContent>
         <ImageColumn>
           {/* Imported Image */}
           <img src={testimonialImageSrc} alt="Happy Customer" />
         </ImageColumn>
         <TextColumn>
           <Subheading>TESTIMONIALS</Subheading>
-          <Heading>Our Clients <span className="text-primary-500">Love Us.</span></Heading>
+          <Heading $lineHeight="1.25" $marginBottom="32px">Our Clients <span className="text-primary-500">Love Us.</span></Heading>
           <TestimonialBox>
             <Stars>
               {[...Array(current.stars)].map((_, i) => <Star key={i} size={20} fill="currentColor" stroke="none" />)}
@@ -196,7 +151,7 @@ export default function Testimonials() {
             </Profile>
           </TestimonialBox>
         </TextColumn>
-      </Content>
+      </SplitContent>
     </Container>
   );
 }
