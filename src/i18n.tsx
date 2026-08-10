@@ -25,6 +25,7 @@ export const I18nProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         // 1. Try to read from Server Injection
         if (window.__INITIAL_STATE__) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time sync from server-injected global state on mount, not a derived-state update
             setTranslations(window.__INITIAL_STATE__);
             // Determine lang from HTML tag or just URL
             setLang(document.documentElement.lang || 'en');
@@ -60,6 +61,7 @@ export const I18nProvider = ({ children }: { children: ReactNode }) => {
     );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components -- Provider + companion hook is an intentional, common context pattern
 export const useTranslation = () => {
     const context = useContext(I18nContext);
     if (!context) {

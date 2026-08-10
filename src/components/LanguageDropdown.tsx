@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { ChevronDown } from "lucide-react";
 import { useTranslation } from "../i18n";
@@ -113,6 +113,7 @@ export default function LanguageDropdown({ className, direction = "down" }: Lang
   const handleLanguageChange = (path: string) => {
     setIsOpen(false);
     // Full page reload/redirect to switch language context
+    // eslint-disable-next-line react-hooks/immutability -- navigation is only triggered from a click handler, not during render
     window.location.href = path;
   };
 
