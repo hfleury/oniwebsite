@@ -130,42 +130,6 @@ const Actions = styled.div`
   }
 `;
 
-const CustomersLogoStrip = styled.div`
-  margin-top: 48px;
-  
-  p {
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    color: #A0AEC0;
-    text-align: center;
-    
-    @media (min-width: ${breakpoints.lg}) {
-      text-align: left;
-    }
-  }
-  
-  .logos {
-    margin-top: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    opacity: 0.5;
-    
-    @media (min-width: ${breakpoints.lg}) {
-      justify-content: flex-start;
-    }
-
-    img, svg {
-      margin-right: 16px;
-      height: 32px;
-      &:last-child { margin-right: 0; }
-    }
-  }
-`;
-
 const IllustrationContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -193,16 +157,6 @@ export default function Hero() {
               {t("hero_cta_button")}
             </Button>
           </Actions>
-          <CustomersLogoStrip>
-            <p>{t("hero_trusted_customers")}</p>
-            <div className="logos">
-              {/* Placeholder for logos - implementing simple text/gray boxes for now or SVGs if time permits */}
-              {/* Using text specific style for logos to simulate the look */}
-              <span className="font-bold text-gray-500 text-lg mr-4">FORTUNE</span>
-              <span className="font-bold text-gray-500 text-lg mr-4">TIME</span>
-              <span className="font-bold text-gray-500 text-lg">Forbes</span>
-            </div>
-          </CustomersLogoStrip>
         </LeftColumn>
         <RightColumn>
           <IllustrationContainer>
