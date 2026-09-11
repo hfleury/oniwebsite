@@ -11,6 +11,27 @@ declare global {
     }
 }
 
+export type Locale = 'en' | 'pt' | 'sv';
+
+// eslint-disable-next-line react-refresh/only-export-components -- shared locale-prefix constant, reused by main.tsx and LanguageDropdown.tsx outside this component tree
+export const LOCALE_PREFIXES: Record<Locale, string> = {
+    en: '',
+    pt: '/pt',
+    sv: '/sv',
+};
+
+// eslint-disable-next-line react-refresh/only-export-components -- standalone URL-prefix helper, must be callable before I18nProvider mounts
+export function getLocaleFromPath(pathname: string): Locale {
+    if (pathname.startsWith('/pt')) return 'pt';
+    if (pathname.startsWith('/sv')) return 'sv';
+    return 'en';
+}
+
+// eslint-disable-next-line react-refresh/only-export-components -- standalone URL-prefix helper, must be callable before I18nProvider mounts
+export function getBasename(pathname: string = window.location.pathname): string {
+    return LOCALE_PREFIXES[getLocaleFromPath(pathname)];
+}
+
 interface I18nContextType {
     t: (key: string) => string;
     lang: string;
@@ -32,11 +53,7 @@ export const I18nProvider = ({ children }: { children: ReactNode }) => {
         } else {
             // Fallback: Fetch from API (for dev flow)
             // Detect lang from URL manually since server didn't inject it
-            const path = window.location.pathname;
-            let currentLang = 'en';
-            if (path.startsWith('/pt')) currentLang = 'pt';
-            else if (path.startsWith('/sv')) currentLang = 'sv';
-
+            const currentLang = getLocaleFromPath(window.location.pathname);
             setLang(currentLang);
 
             fetch(`/api/translations?lang=${currentLang}`)

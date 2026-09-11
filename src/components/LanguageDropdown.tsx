@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { ChevronDown } from "lucide-react";
-import { useTranslation } from "../i18n";
+import { useTranslation, LOCALE_PREFIXES } from "../i18n";
 
 const Container = styled.div`
   position: relative;
@@ -80,9 +80,9 @@ const FlagIcon = styled.span`
 `;
 
 const languages = [
-  { code: "en", label: "English", flag: "🇺🇸", path: "/" },
-  { code: "pt", label: "Português", flag: "🇧🇷", path: "/pt" },
-  { code: "sv", label: "Svenska", flag: "🇸🇪", path: "/sv" },
+  { code: "en", label: "English", flag: "🇺🇸", path: LOCALE_PREFIXES.en || "/" },
+  { code: "pt", label: "Português", flag: "🇧🇷", path: LOCALE_PREFIXES.pt },
+  { code: "sv", label: "Svenska", flag: "🇸🇪", path: LOCALE_PREFIXES.sv },
 ];
 
 interface LanguageDropdownProps {
