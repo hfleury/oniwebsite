@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, dev, qa]
   pull_request:
-    branches: [main]
+    branches: [main, dev, qa]
 
 jobs:
   lint-build-test:
@@ -18,4 +18,50 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run build
+        env:
+          VITE_SENTRY_DSN: ${{ vars.VITE_SENTRY_DSN }}
       - run: npm test
+      - if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend
+          path: dist/
+          if-no-files-found: error
+
+  deploy:
+    needs: lint-build-test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: production
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: false
+    permissions:
+      contents: read
+    env:
+      DROPLET_HOST: ${{ secrets.DROPLET_HOST }}
+      DOMAIN: ${{ vars.DOMAIN }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: frontend
+          path: dist
+      - name: Configure SSH
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          install -d -m 0700 ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 0600 ~/.ssh/id_ed25519
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          printf 'Host *\n  StrictHostKeyChecking yes\n' > ~/.ssh/config
+      - name: Upload release to droplet
+        run: rsync -az --delete dist/ "deploy@$DROPLET_HOST:/opt/oni/oniwebsite/releases/$GITHUB_SHA/"
+      - name: Point the site at the new release
+        run: ssh "deploy@$DROPLET_HOST" /usr/local/sbin/deploy-frontend "$GITHUB_SHA"
+      - name: Smoke test
+        run: |
+          for path in / /pt/ /sv/; do
+            curl -fsS --max-time 15 --retry 5 --retry-delay 3 --retry-all-errors -o /dev/null "https://$DOMAIN$path"
+          done

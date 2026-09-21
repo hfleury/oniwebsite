@@ -3,6 +3,7 @@ import "tailwindcss/tailwind.css";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/headers/Light";
 import Hero from "./components/Hero";
+import Services from "./components/Services";
 import Features from "./components/Features";
 import Footer from "./components/Footer";
 import ServiceDetail from "./components/ServiceDetail";
@@ -11,6 +12,7 @@ function HomePage() {
   return (
     <>
       <Hero />
+      <Services />
       <Features />
     </>
   );
