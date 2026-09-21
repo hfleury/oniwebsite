@@ -85,6 +85,16 @@ const languages = [
   { code: "sv", label: "Svenska", flag: "🇸🇪", path: LOCALE_PREFIXES.sv },
 ];
 
+// Read by the server at "/" (see LanguageDetectorMiddleware in oniwebsite_bk).
+const LANGUAGE_COOKIE = "lang";
+const ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
+
+// Remember the explicit choice so "/" isn't redirected back to the browser's language.
+function saveLanguagePreference(code: string) {
+  const secure = window.location.protocol === "https:" ? "; Secure" : "";
+  document.cookie = `${LANGUAGE_COOKIE}=${code}; Path=/; Max-Age=${ONE_YEAR_SECONDS}; SameSite=Lax${secure}`;
+}
+
 interface LanguageDropdownProps {
   className?: string;
   direction?: "up" | "down";
@@ -110,8 +120,9 @@ export default function LanguageDropdown({ className, direction = "down" }: Lang
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleLanguageChange = (path: string) => {
+  const handleLanguageChange = (code: string, path: string) => {
     setIsOpen(false);
+    saveLanguagePreference(code);
     // Full page reload/redirect to switch language context
     // eslint-disable-next-line react-hooks/immutability -- navigation is only triggered from a click handler, not during render
     window.location.href = path;
@@ -128,7 +139,7 @@ export default function LanguageDropdown({ className, direction = "down" }: Lang
         {languages.map((l) => (
           <Option
             key={l.code}
-            onClick={() => handleLanguageChange(l.path)}
+            onClick={() => handleLanguageChange(l.code, l.path)}
             style={{ fontWeight: l.code === lang ? 600 : 400 }}
           >
             <FlagIcon>{l.flag}</FlagIcon>
