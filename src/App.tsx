@@ -8,6 +8,7 @@ import Features from "./components/Features";
 import Footer from "./components/Footer";
 import ServiceDetail from "./components/ServiceDetail";
 import PrivacyPolicy from "./components/PrivacyPolicy";
+import CookieConsentBanner from "./components/CookieConsentBanner";
 
 function HomePage() {
   return (
@@ -31,6 +32,7 @@ function App() {
       <div className="mt-auto w-full">
         <Footer />
       </div>
+      <CookieConsentBanner />
     </div>
   );
 }
