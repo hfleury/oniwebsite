@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import { Facebook, Twitter, Instagram } from "lucide-react";
 import LanguageDropdown from "./LanguageDropdown";
+import { useTranslation } from "../i18n";
 import { colors, breakpoints } from "../styles/tokens";
 import { Container as BaseContainer } from "./ui/Section";
 
@@ -160,6 +161,8 @@ const SocialLink = styled.a`
 `;
 
 export default function Footer() {
+  const { t } = useTranslation();
+
   return (
     <Container>
       <Content>
@@ -202,8 +205,8 @@ export default function Footer() {
           <Column>
             <ColumnHeading>Legal</ColumnHeading>
             <LinkList>
-              <LinkListItem><Link href="#">GDPR</Link></LinkListItem>
-              <LinkListItem><Link href="#">Privacy Policy</Link></LinkListItem>
+              <LinkListItem><Link href="/privacy#gdpr">{t("footer_legal_gdpr")}</Link></LinkListItem>
+              <LinkListItem><Link href="/privacy">{t("footer_legal_privacy_policy")}</Link></LinkListItem>
               <LinkListItem><Link href="#">Terms of Service</Link></LinkListItem>
               <LinkListItem><Link href="#">Disclaimer</Link></LinkListItem>
             </LinkList>
