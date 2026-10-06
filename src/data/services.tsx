@@ -1,5 +1,12 @@
 import type { ReactNode } from "react";
-import { Server, RefreshCw, Cloud, Users } from "lucide-react";
+import {
+  Server,
+  RefreshCw,
+  Cloud,
+  Users,
+  BrainCircuit,
+  ShieldCheck,
+} from "lucide-react";
 
 export interface ServiceLine {
   id: string;
@@ -12,11 +19,25 @@ export interface ServiceLine {
 
 export const services: ServiceLine[] = [
   {
-    id: "enterprise-software",
-    icon: <Server size={24} strokeWidth={2.5} />,
-    titleKey: "services_enterprise_software_title",
-    descriptionKey: "services_enterprise_software_description",
-    technologies: ["Golang", "Python", "Kafka", "Microservices"],
+    id: "cloud-devops",
+    icon: <Cloud size={24} strokeWidth={2.5} />,
+    titleKey: "services_cloud_devops_title",
+    descriptionKey: "services_cloud_devops_description",
+    technologies: ["AWS", "Google Cloud", "Kubernetes", "Docker"],
+  },
+  {
+    id: "ai-engineering",
+    icon: <BrainCircuit size={24} strokeWidth={2.5} />,
+    titleKey: "services_ai_engineering_title",
+    descriptionKey: "services_ai_engineering_description",
+    technologies: [
+      "LLM",
+      "RAG",
+      "Agents",
+      "Evaluation",
+      "Observability",
+      "Guardrails",
+    ],
   },
   {
     id: "legacy-modernization",
@@ -26,11 +47,24 @@ export const services: ServiceLine[] = [
     technologies: ["Refactoring", "System Architecture", "Database Migration"],
   },
   {
-    id: "cloud-devops",
-    icon: <Cloud size={24} strokeWidth={2.5} />,
-    titleKey: "services_cloud_devops_title",
-    descriptionKey: "services_cloud_devops_description",
-    technologies: ["AWS", "Google Cloud", "Kubernetes", "Docker"],
+    id: "security-compliance",
+    icon: <ShieldCheck size={24} strokeWidth={2.5} />,
+    titleKey: "services_security_compliance_title",
+    descriptionKey: "services_security_compliance_description",
+    technologies: [
+      "Secure SDLC",
+      "Threat Modeling",
+      "Dependency Scanning",
+      "SBOMs",
+      "Compliance-Evidence Automation",
+    ],
+  },
+  {
+    id: "enterprise-software",
+    icon: <Server size={24} strokeWidth={2.5} />,
+    titleKey: "services_enterprise_software_title",
+    descriptionKey: "services_enterprise_software_description",
+    technologies: ["Golang", "Python", "Kafka", "Microservices"],
   },
   {
     id: "staff-augmentation",
