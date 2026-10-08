@@ -19,10 +19,12 @@ const Grid = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   gap: 32px;
-  margin-top: 48px;
+  max-width: 1280px;
+  margin: 48px auto 0;
 `;
 
 const Column = styled.div`
+  display: flex;
   width: 100%;
 
   @media (min-width: ${breakpoints.md}) {
@@ -62,6 +64,8 @@ const IconContainer = styled.span`
 const CardContent = styled.div`
   display: flex;
   flex-direction: column;
+  flex: 1;
+  align-self: stretch;
 `;
 
 const Title = styled.h4`
@@ -85,7 +89,8 @@ const ProofPoint = styled.p`
 const LearnMoreLink = styled(Link)`
   color: ${colors.primary};
   font-weight: 600;
-  margin-top: 16px;
+  margin-top: auto;
+  padding-top: 16px;
   display: inline-block;
   text-decoration: none;
 
@@ -112,7 +117,7 @@ export default function Services() {
                 <Title>{t(s.titleKey)}</Title>
                 <Text>{t(s.descriptionKey)}</Text>
                 {s.proofPointKey && <ProofPoint>{t(s.proofPointKey)}</ProofPoint>}
-                <LearnMoreLink to={`/services/${s.id}`}>Learn more</LearnMoreLink>
+                <LearnMoreLink to={`/services/${s.id}`}>{t("services_learn_more")}</LearnMoreLink>
               </CardContent>
             </Card>
           </Column>
