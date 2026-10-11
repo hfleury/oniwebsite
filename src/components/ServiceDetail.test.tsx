@@ -43,10 +43,16 @@ describe('ServiceDetail', () => {
 
     expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent(`${keyPrefix(id)}_title`);
     expect(screen.getByText(`${keyPrefix(id)}_description`)).toBeInTheDocument();
-    expect(screen.getByRole('heading', { level: 3 })).toHaveTextContent('services_technologies_heading');
+    expect(screen.getByRole('heading', { level: 3, name: 'services_technologies_heading' })).toBeInTheDocument();
 
     const techs = screen.getAllByRole('listitem').map((li) => li.textContent);
     expect(techs).toEqual(services.find((s) => s.id === id)?.technologies);
+
+    expect(screen.getByRole('heading', { level: 3, name: 'cta_growth_title' })).toBeInTheDocument();
+    const cta = screen.getByRole('link', { name: 'cta_growth_button' });
+    expect(cta).toHaveAttribute('href', 'mailto:oniweb@oniweb.com.br?subject=cta_growth_title');
+    const backLink = screen.getByRole('link', { name: 'services_back_to_home' });
+    expect(cta.compareDocumentPosition(backLink) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 
   it('redirects an unknown id to /', () => {
