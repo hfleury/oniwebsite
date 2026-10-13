@@ -5,6 +5,7 @@ import { colors, breakpoints } from "../styles/tokens";
 import { Container as BaseContainer } from "./ui/Section";
 import { Subheading, Heading } from "./ui/SectionHeading";
 import { services } from "../data/services";
+import GrowthCta from "./GrowthCta";
 
 const Container = styled(BaseContainer).attrs({})``;
 
@@ -91,6 +92,7 @@ export default function ServiceDetail() {
             <TechItem key={tech}>{tech}</TechItem>
           ))}
         </TechList>
+        <GrowthCta />
         <BackLink to="/">{t("services_back_to_home")}</BackLink>
       </Content>
     </Container>

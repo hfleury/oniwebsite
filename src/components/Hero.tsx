@@ -1,9 +1,11 @@
 
+import type { FormEvent } from "react";
 import styled from "styled-components";
 import heroIllustrationSrc from "../assets/hero_illustration_dalmatian.png";
 import { useTranslation } from "../i18n";
 import { colors, breakpoints } from "../styles/tokens";
 import { Button } from "./ui/Button";
+import { buildGrowthMailto, openMailto } from "../data/contact";
 
 
 const Container = styled.div`
@@ -82,7 +84,7 @@ const Paragraph = styled.p`
   }
 `;
 
-const Actions = styled.div`
+const Actions = styled.form`
   margin-top: 32px;
   display: flex;
   flex-direction: column;
@@ -138,6 +140,18 @@ const IllustrationContainer = styled.div`
 
 export default function Hero() {
   const { t } = useTranslation();
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const email = String(new FormData(event.currentTarget).get("email") ?? "").trim();
+    openMailto(
+      buildGrowthMailto({
+        subject: t("cta_growth_title"),
+        body: email ? `${t("cta_growth_mailto_body")} ${email}` : undefined,
+      })
+    );
+  };
+
   return (
     <Container>
       <Content>
@@ -148,9 +162,10 @@ export default function Hero() {
           <Paragraph>
             {t("hero_description")}
           </Paragraph>
-          <Actions>
-            <input type="email" placeholder={t("hero_email_placeholder")} />
+          <Actions onSubmit={handleSubmit}>
+            <input type="email" name="email" placeholder={t("hero_email_placeholder")} />
             <Button
+              type="submit"
               $shadow="0 4px 6px -1px rgba(23, 161, 218, 0.1), 0 2px 4px -1px rgba(23, 161, 218, 0.06)"
               $hoverShadow="0 10px 15px -3px rgba(23, 161, 218, 0.2), 0 4px 6px -2px rgba(23, 161, 218, 0.1)"
             >
@@ -163,7 +178,7 @@ export default function Hero() {
             {/* Using the embedded generated artifact image */}
             <img
               src={heroIllustrationSrc}
-              alt="Hero Illustration"
+              alt={t("hero_image_alt")}
               className="w-full max-w-full h-auto"
             />
           </IllustrationContainer>
