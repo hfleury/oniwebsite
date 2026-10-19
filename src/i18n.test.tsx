@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { I18nProvider, useTranslation } from './i18n';
+import { I18nProvider, localizePath, useTranslation } from './i18n';
 
 function TranslatedText({ tKey }: { tKey: string }) {
   const { t } = useTranslation();
@@ -32,5 +32,25 @@ describe('i18n', () => {
     );
 
     consoleErrorSpy.mockRestore();
+  });
+});
+
+describe('localizePath', () => {
+  it.each([
+    ['/', 'pt', '/pt'],
+    ['/', 'sv', '/sv'],
+    ['/', 'en', '/'],
+    ['/pt', 'en', '/'],
+    ['/pt', 'sv', '/sv'],
+    ['/pt/', 'en', '/'],
+    ['/pt/', 'sv', '/sv'],
+    ['/services/cloud-devops', 'pt', '/pt/services/cloud-devops'],
+    ['/services/cloud-devops', 'sv', '/sv/services/cloud-devops'],
+    ['/pt/services/cloud-devops', 'en', '/services/cloud-devops'],
+    ['/pt/services/cloud-devops', 'sv', '/sv/services/cloud-devops'],
+    ['/sv/privacy', 'pt', '/pt/privacy'],
+    ['/ptx', 'en', '/ptx'],
+  ] as const)('%s to %s is %s', (pathname, target, expected) => {
+    expect(localizePath(target, pathname)).toBe(expected);
   });
 });

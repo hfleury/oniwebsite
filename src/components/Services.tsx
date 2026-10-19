@@ -14,10 +14,12 @@ const HeaderRow = styled.div`
   text-align: center;
 `;
 
+// The column count follows the available width: 1 on phones, 2 on tablets,
+// 3 on desktop. The 1280px cap with a 340px minimum keeps it at 3 at most, so
+// six cards always form even rows.
 const Grid = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
   gap: 32px;
   max-width: 1280px;
   margin: 48px auto 0;
@@ -25,11 +27,6 @@ const Grid = styled.div`
 
 const Column = styled.div`
   display: flex;
-  width: 100%;
-
-  @media (min-width: ${breakpoints.md}) {
-    width: calc(50% - 16px);
-  }
 `;
 
 const Card = styled.div`
