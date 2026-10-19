@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { ChevronDown } from "lucide-react";
-import { useTranslation, LOCALE_PREFIXES } from "../i18n";
+import { useTranslation, localizePath } from "../i18n";
+import type { Locale } from "../i18n";
 
 const Container = styled.div`
   position: relative;
@@ -79,10 +80,10 @@ const FlagIcon = styled.span`
   line-height: 1;
 `;
 
-const languages = [
-  { code: "en", label: "English", flag: "🇺🇸", path: LOCALE_PREFIXES.en || "/" },
-  { code: "pt", label: "Português", flag: "🇧🇷", path: LOCALE_PREFIXES.pt },
-  { code: "sv", label: "Svenska", flag: "🇸🇪", path: LOCALE_PREFIXES.sv },
+const languages: { code: Locale; label: string; flag: string }[] = [
+  { code: "en", label: "English", flag: "🇺🇸" },
+  { code: "pt", label: "Português", flag: "🇧🇷" },
+  { code: "sv", label: "Svenska", flag: "🇸🇪" },
 ];
 
 // Read by the server at "/" (see LanguageDetectorMiddleware in oniwebsite_bk).
@@ -120,12 +121,12 @@ export default function LanguageDropdown({ className, direction = "down" }: Lang
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleLanguageChange = (code: string, path: string) => {
+  const handleLanguageChange = (code: Locale) => {
     setIsOpen(false);
     saveLanguagePreference(code);
-    // Full page reload/redirect to switch language context
+    // Full page reload to switch language context, staying on the same page
     // eslint-disable-next-line react-hooks/immutability -- navigation is only triggered from a click handler, not during render
-    window.location.href = path;
+    window.location.href = localizePath(code, window.location.pathname);
   };
 
   return (
@@ -139,7 +140,7 @@ export default function LanguageDropdown({ className, direction = "down" }: Lang
         {languages.map((l) => (
           <Option
             key={l.code}
-            onClick={() => handleLanguageChange(l.code, l.path)}
+            onClick={() => handleLanguageChange(l.code)}
             style={{ fontWeight: l.code === lang ? 600 : 400 }}
           >
             <FlagIcon>{l.flag}</FlagIcon>

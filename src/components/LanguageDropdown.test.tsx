@@ -39,7 +39,7 @@ describe('LanguageDropdown', () => {
   ])('choosing %s saves the lang cookie and navigates to %s', (label, code, path) => {
     window.__INITIAL_STATE__ = {};
     // Replace location so the click's navigation doesn't hit jsdom's "not implemented".
-    vi.stubGlobal('location', { href: '/somewhere', protocol: 'http:' });
+    vi.stubGlobal('location', { href: '/somewhere', pathname: '/', protocol: 'http:' });
 
     render(
       <I18nProvider>
@@ -52,6 +52,25 @@ describe('LanguageDropdown', () => {
     fireEvent.click(matches[matches.length - 1]);
 
     expect(document.cookie).toContain(`lang=${code}`);
+    expect(window.location.href).toBe(path);
+  });
+
+  it.each([
+    ['English', '/services/cloud-devops'],
+    ['Svenska', '/sv/services/cloud-devops'],
+  ])('choosing %s on a Portuguese service page navigates to %s', (label, path) => {
+    window.__INITIAL_STATE__ = {};
+    vi.stubGlobal('location', { href: '/somewhere', pathname: '/pt/services/cloud-devops', protocol: 'http:' });
+
+    render(
+      <I18nProvider>
+        <LanguageDropdown />
+      </I18nProvider>
+    );
+
+    const matches = screen.getAllByText(label);
+    fireEvent.click(matches[matches.length - 1]);
+
     expect(window.location.href).toBe(path);
   });
 });
