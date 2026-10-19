@@ -14,20 +14,19 @@ const HeaderRow = styled.div`
   text-align: center;
 `;
 
+// The column count follows the available width: 1 on phones, 2 on tablets,
+// 3 on desktop. The 1280px cap with a 340px minimum keeps it at 3 at most, so
+// six cards always form even rows.
 const Grid = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
   gap: 32px;
-  margin-top: 48px;
+  max-width: 1280px;
+  margin: 48px auto 0;
 `;
 
 const Column = styled.div`
-  width: 100%;
-
-  @media (min-width: ${breakpoints.md}) {
-    width: calc(50% - 16px);
-  }
+  display: flex;
 `;
 
 const Card = styled.div`
@@ -62,6 +61,8 @@ const IconContainer = styled.span`
 const CardContent = styled.div`
   display: flex;
   flex-direction: column;
+  flex: 1;
+  align-self: stretch;
 `;
 
 const Title = styled.h4`
@@ -85,7 +86,8 @@ const ProofPoint = styled.p`
 const LearnMoreLink = styled(Link)`
   color: ${colors.primary};
   font-weight: 600;
-  margin-top: 16px;
+  margin-top: auto;
+  padding-top: 16px;
   display: inline-block;
   text-decoration: none;
 
@@ -112,7 +114,7 @@ export default function Services() {
                 <Title>{t(s.titleKey)}</Title>
                 <Text>{t(s.descriptionKey)}</Text>
                 {s.proofPointKey && <ProofPoint>{t(s.proofPointKey)}</ProofPoint>}
-                <LearnMoreLink to={`/services/${s.id}`}>Learn more</LearnMoreLink>
+                <LearnMoreLink to={`/services/${s.id}`}>{t("services_learn_more")}</LearnMoreLink>
               </CardContent>
             </Card>
           </Column>

@@ -27,6 +27,16 @@ export function getLocaleFromPath(pathname: string): Locale {
     return 'en';
 }
 
+// eslint-disable-next-line react-refresh/only-export-components -- standalone URL-prefix helper, used by LanguageDropdown outside the router
+export function localizePath(target: Locale, pathname: string): string {
+    const currentPrefix = Object.values(LOCALE_PREFIXES).find(
+        prefix => prefix !== '' && (pathname === prefix || pathname.startsWith(prefix + '/')),
+    );
+    const barePath = (currentPrefix ? pathname.slice(currentPrefix.length) : pathname) || '/';
+    if (barePath === '/') return LOCALE_PREFIXES[target] || '/';
+    return LOCALE_PREFIXES[target] + barePath;
+}
+
 // eslint-disable-next-line react-refresh/only-export-components -- standalone URL-prefix helper, must be callable before I18nProvider mounts
 export function getBasename(pathname: string = window.location.pathname): string {
     return LOCALE_PREFIXES[getLocaleFromPath(pathname)];

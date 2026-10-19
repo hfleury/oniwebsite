@@ -5,6 +5,7 @@ import { colors, breakpoints } from "../styles/tokens";
 import { Container as BaseContainer } from "./ui/Section";
 import { Subheading, Heading } from "./ui/SectionHeading";
 import { services } from "../data/services";
+import GrowthCta from "./GrowthCta";
 
 const Container = styled(BaseContainer).attrs({})``;
 
@@ -85,13 +86,14 @@ export default function ServiceDetail() {
         <Subheading>{t("services_section_subheading")}</Subheading>
         <Heading>{t(service.titleKey)}</Heading>
         <Text>{t(service.descriptionKey)}</Text>
-        <TechHeading>Technologies</TechHeading>
+        <TechHeading>{t("services_technologies_heading")}</TechHeading>
         <TechList>
           {service.technologies.map((tech) => (
             <TechItem key={tech}>{tech}</TechItem>
           ))}
         </TechList>
-        <BackLink to="/">Back to home</BackLink>
+        <GrowthCta />
+        <BackLink to="/">{t("services_back_to_home")}</BackLink>
       </Content>
     </Container>
   );
