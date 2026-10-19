@@ -70,6 +70,7 @@ const Title = styled.h4`
   font-size: 1.25rem;
   color: ${colors.headingDark};
   margin-bottom: 8px;
+  overflow-wrap: break-word;
 `;
 
 const Text = styled.p`

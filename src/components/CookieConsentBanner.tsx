@@ -81,10 +81,22 @@ const PolicyLink = styled.a`
   }
 `;
 
+// Below md the buttons share a line when it fits and stack when it doesn't,
+// so long PT/SV labels never push the reject button off-screen.
 const Actions = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
-  flex: 0 0 auto;
+  flex: 1 1 auto;
+
+  & > button {
+    flex: 1 1 auto;
+  }
+
+  @media (min-width: ${breakpoints.md}) {
+    flex: 0 0 auto;
+    flex-wrap: nowrap;
+  }
 `;
 
 export default function CookieConsentBanner() {

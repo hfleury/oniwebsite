@@ -19,6 +19,7 @@ export const Heading = styled.h2<{
   font-weight: 900;
   font-size: 2rem;
   color: ${colors.headingDark};
+  overflow-wrap: break-word;
   ${props => props.$lineHeight && `line-height: ${props.$lineHeight};`}
   ${props => props.$marginBottom && `margin-bottom: ${props.$marginBottom};`}
   ${props => props.$textAlign && `text-align: ${props.$textAlign};`}
