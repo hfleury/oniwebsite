@@ -2,7 +2,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { I18nProvider } from '../i18n';
-import CookieConsentBanner, { hasOptionalConsent } from './CookieConsentBanner';
+import { CONSENT_CHANGE_EVENT, hasOptionalConsent } from '../consent';
+import CookieConsentBanner from './CookieConsentBanner';
 
 function clearConsentCookie() {
   document.cookie = 'cookie_consent=; Path=/; Max-Age=0';
@@ -62,6 +63,21 @@ describe('CookieConsentBanner', () => {
     expect(document.cookie).toContain('cookie_consent=accepted');
     expect(screen.queryByText('cookie_banner_accept')).not.toBeInTheDocument();
     expect(hasOptionalConsent()).toBe(true);
+  });
+
+  it.each([
+    ['cookie_banner_accept', 'accepted'],
+    ['cookie_banner_reject', 'rejected'],
+  ])('clicking %s dispatches the consent change event with %s', (label, value) => {
+    const listener = vi.fn();
+    window.addEventListener(CONSENT_CHANGE_EVENT, listener);
+    renderBanner('/');
+
+    fireEvent.click(screen.getByText(label));
+
+    window.removeEventListener(CONSENT_CHANGE_EVENT, listener);
+    expect(listener).toHaveBeenCalledTimes(1);
+    expect((listener.mock.calls[0][0] as CustomEvent).detail).toBe(value);
   });
 
   it('clicking Reject writes cookie_consent=rejected, hides the banner, and withholds optional consent', () => {
