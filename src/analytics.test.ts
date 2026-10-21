@@ -59,7 +59,7 @@ describe('initAnalytics', () => {
     expect(posthog.init).not.toHaveBeenCalled();
   });
 
-  it('initializes PostHog for the EU, cookieless on reject, with replay, surveys, heatmaps and web vitals off', async () => {
+  it('initializes PostHog for the EU, opted out until consent, with replay, surveys, heatmaps and web vitals off', async () => {
     const { initAnalytics } = await loadAnalytics();
 
     await initAnalytics();
@@ -68,7 +68,8 @@ describe('initAnalytics', () => {
       'phc_test',
       expect.objectContaining({
         api_host: 'https://eu.i.posthog.com',
-        cookieless_mode: 'on_reject',
+        opt_out_capturing_by_default: true,
+        opt_out_persistence_by_default: true,
         autocapture: true,
         disable_session_recording: true,
         disable_surveys: true,
@@ -107,7 +108,15 @@ describe('initAnalytics', () => {
     expect(posthog.opt_in_capturing).not.toHaveBeenCalled();
   });
 
-  it('opts out (cookieless) when consent was already rejected', async () => {
+  it('never enables cookieless capture, so a reject sends nothing', async () => {
+    const { initAnalytics } = await loadAnalytics();
+
+    await initAnalytics();
+
+    expect(vi.mocked(posthog.init).mock.calls[0][1]).not.toHaveProperty('cookieless_mode');
+  });
+
+  it('opts out when consent was already rejected', async () => {
     setConsentCookie('rejected');
     const { initAnalytics } = await loadAnalytics();
 

@@ -44,13 +44,14 @@ const SectionText = styled.p`
 // One entry per policy section: id is the stable anchor Footer links (and
 // FOWO-88's cookie-consent banner) target via /privacy#<id>. Driving the
 // render off this table instead of repeating JSX per section keeps every
-// section's markup identical and avoids re-typing t() calls seven times.
+// section's markup identical and avoids re-typing t() calls per section.
 const SECTIONS = [
   { id: "controller", headingKey: "privacy_controller_heading", bodyKey: "privacy_controller_body" },
   { id: "gdpr", headingKey: "privacy_gdpr_heading", bodyKey: "privacy_gdpr_body" },
   { id: "us-privacy", headingKey: "privacy_us_privacy_heading", bodyKey: "privacy_us_privacy_body" },
   { id: "lgpd", headingKey: "privacy_lgpd_heading", bodyKey: "privacy_lgpd_body" },
   { id: "cookies", headingKey: "privacy_cookies_heading", bodyKey: "privacy_cookies_body" },
+  { id: "service-providers", headingKey: "privacy_providers_heading", bodyKey: "privacy_providers_body" },
   { id: "future-processing", headingKey: "privacy_future_heading", bodyKey: "privacy_future_body" },
   { id: "contact", headingKey: "privacy_contact_heading", bodyKey: "privacy_contact_body" },
 ] as const;
