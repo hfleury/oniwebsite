@@ -6,6 +6,7 @@ import { useTranslation } from "../i18n";
 import { colors, breakpoints } from "../styles/tokens";
 import { Button } from "./ui/Button";
 import { buildGrowthMailto, openMailto } from "../data/contact";
+import { trackCtaClick } from "../analytics";
 
 
 const Container = styled.div`
@@ -144,6 +145,7 @@ export default function Hero() {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const email = String(new FormData(event.currentTarget).get("email") ?? "").trim();
+    trackCtaClick("hero_email");
     openMailto(
       buildGrowthMailto({
         subject: t("cta_growth_title"),

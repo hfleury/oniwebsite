@@ -5,6 +5,7 @@ import * as Sentry from '@sentry/react'
 import './index.css'
 import App from './App.tsx'
 import { I18nProvider, getBasename } from './i18n.tsx'
+import { initAnalytics } from './analytics.ts'
 
 Sentry.init({
   dsn: import.meta.env.VITE_SENTRY_DSN,
@@ -12,6 +13,8 @@ Sentry.init({
   tracesSampleRate: 1.0,
   tracePropagationTargets: [window.location.origin, 'localhost'],
 })
+
+void initAnalytics()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

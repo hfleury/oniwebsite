@@ -4,33 +4,7 @@ import styled from "styled-components";
 import { useTranslation, LOCALE_PREFIXES, getLocaleFromPath } from "../i18n";
 import { Button } from "./ui/Button";
 import { colors, breakpoints } from "../styles/tokens";
-
-// Mirrors LanguageDropdown.tsx's document.cookie pattern for the "lang"
-// cookie: same Path/Max-Age/SameSite/conditional-Secure shape, one year.
-const COOKIE_CONSENT = "cookie_consent";
-const ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
-
-type ConsentValue = "accepted" | "rejected";
-
-function readCookieConsent(): ConsentValue | null {
-  const value = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith(`${COOKIE_CONSENT}=`))
-    ?.slice(COOKIE_CONSENT.length + 1);
-  return value === "accepted" || value === "rejected" ? value : null;
-}
-
-function writeCookieConsent(value: ConsentValue) {
-  const secure = window.location.protocol === "https:" ? "; Secure" : "";
-  document.cookie = `${COOKIE_CONSENT}=${value}; Path=/; Max-Age=${ONE_YEAR_SECONDS}; SameSite=Lax${secure}`;
-}
-
-// Exported for future analytics code to check before loading anything
-// non-essential. No such script exists yet — this is groundwork only.
-// eslint-disable-next-line react-refresh/only-export-components -- standalone helper, must be callable outside this component's render tree
-export function hasOptionalConsent(): boolean {
-  return readCookieConsent() === "accepted";
-}
+import { readCookieConsent, writeCookieConsent } from "../consent";
 
 // The banner never shows on the Privacy Policy page itself. In production,
 // useLocation()'s pathname is already relative to BrowserRouter's basename
@@ -81,10 +55,22 @@ const PolicyLink = styled.a`
   }
 `;
 
+// Below md the buttons share a line when it fits and stack when it doesn't,
+// so long PT/SV labels never push the reject button off-screen.
 const Actions = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
-  flex: 0 0 auto;
+  flex: 1 1 auto;
+
+  & > button {
+    flex: 1 1 auto;
+  }
+
+  @media (min-width: ${breakpoints.md}) {
+    flex: 0 0 auto;
+    flex-wrap: nowrap;
+  }
 `;
 
 export default function CookieConsentBanner() {

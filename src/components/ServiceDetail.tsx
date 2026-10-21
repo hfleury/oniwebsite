@@ -92,7 +92,7 @@ export default function ServiceDetail() {
             <TechItem key={tech}>{tech}</TechItem>
           ))}
         </TechList>
-        <GrowthCta />
+        <GrowthCta serviceId={service.id} />
         <BackLink to="/">{t("services_back_to_home")}</BackLink>
       </Content>
     </Container>
