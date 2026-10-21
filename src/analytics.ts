@@ -37,7 +37,10 @@ export async function initAnalytics() {
   posthog.init(key, {
     api_host: "https://eu.i.posthog.com",
     defaults: "2026-08-30",
-    cookieless_mode: "on_reject",
+    // Nothing is sent and no ph_* identity is stored until the visitor accepts;
+    // a reject keeps it that way (only PostHog's opt-out flag is written).
+    opt_out_capturing_by_default: true,
+    opt_out_persistence_by_default: true,
     autocapture: true,
     // Pinned off here so a toggle in the PostHog dashboard can't turn them on.
     disable_session_recording: true,
