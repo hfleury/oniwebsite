@@ -5,6 +5,7 @@ import { colors, breakpoints } from "../styles/tokens";
 import { Container as BaseContainer } from "./ui/Section";
 import { Subheading, Heading } from "./ui/SectionHeading";
 import { services } from "../data/services";
+import { trackCtaClick } from "../analytics";
 
 const Container = styled(BaseContainer).attrs({})``;
 
@@ -115,7 +116,12 @@ export default function Services() {
                 <Title>{t(s.titleKey)}</Title>
                 <Text>{t(s.descriptionKey)}</Text>
                 {s.proofPointKey && <ProofPoint>{t(s.proofPointKey)}</ProofPoint>}
-                <LearnMoreLink to={`/services/${s.id}`}>{t("services_learn_more")}</LearnMoreLink>
+                <LearnMoreLink
+                  to={`/services/${s.id}`}
+                  onClick={() => trackCtaClick("services_learn_more", { service_id: s.id })}
+                >
+                  {t("services_learn_more")}
+                </LearnMoreLink>
               </CardContent>
             </Card>
           </Column>
