@@ -3,6 +3,7 @@ import { useTranslation } from "../i18n";
 import { colors, breakpoints } from "../styles/tokens";
 import { Button } from "./ui/Button";
 import { buildGrowthMailto } from "../data/contact";
+import { trackCtaClick } from "../analytics";
 
 const Block = styled.section`
   margin-top: 32px;
@@ -46,13 +47,17 @@ const CtaLink = styled(Button)`
   }
 `;
 
-export default function GrowthCta() {
+export default function GrowthCta({ serviceId }: { serviceId: string }) {
   const { t } = useTranslation();
   return (
     <Block>
       <Title>{t("cta_growth_title")}</Title>
       <Description>{t("cta_growth_description")}</Description>
-      <CtaLink as="a" href={buildGrowthMailto({ subject: t("cta_growth_title") })}>
+      <CtaLink
+        as="a"
+        href={buildGrowthMailto({ subject: t("cta_growth_title") })}
+        onClick={() => trackCtaClick("growth_mailto", { service_id: serviceId })}
+      >
         {t("cta_growth_button")}
       </CtaLink>
     </Block>

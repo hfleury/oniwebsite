@@ -220,8 +220,8 @@ export default function Footer() {
           <Copyright>
             &copy; 2026 Treact Inc. All Rights Reserved.
           </Copyright>
-          <div className="flex items-center mt-4 md:mt-0">
-            <LanguageDropdown direction="up" className="mr-6 text-gray-900 bg-gray-100 rounded-full border-none" />
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 mt-4 md:mt-0">
+            <LanguageDropdown direction="up" className="text-gray-900 bg-gray-100 rounded-full border-none" />
             <SocialLinks style={{ marginTop: 0 }}>
               <SocialLink href="https://facebook.com"><Facebook size={20} /></SocialLink>
               <SocialLink href="https://twitter.com"><Twitter size={20} /></SocialLink>

@@ -2,12 +2,14 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { I18nProvider } from '../i18n';
 import { openMailto } from '../data/contact';
+import { trackCtaClick } from '../analytics';
 import Hero from './Hero';
 
 vi.mock('../data/contact', async (importOriginal) => ({
   ...(await importOriginal<typeof import('../data/contact')>()),
   openMailto: vi.fn(),
 }));
+vi.mock('../analytics', () => ({ trackCtaClick: vi.fn() }));
 
 function renderHero() {
   window.__INITIAL_STATE__ = {};
@@ -28,6 +30,7 @@ function submitWithEmail(email: string) {
 afterEach(() => {
   cleanup();
   vi.mocked(openMailto).mockClear();
+  vi.mocked(trackCtaClick).mockClear();
   delete window.__INITIAL_STATE__;
 });
 
@@ -52,6 +55,13 @@ describe('Hero', () => {
     const url = vi.mocked(openMailto).mock.calls[0][0];
     expect(url).toContain('subject=cta_growth_title');
     expect(url).toContain('body=cta_growth_mailto_body%20a%40b.co');
+  });
+
+  it('tracks the submit as the hero_email CTA', () => {
+    renderHero();
+    submitWithEmail('a@b.co');
+
+    expect(trackCtaClick).toHaveBeenCalledExactlyOnceWith('hero_email');
   });
 
   it('opens the growth mailto without a body when no email is typed', () => {

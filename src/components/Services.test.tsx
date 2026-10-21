@@ -1,8 +1,11 @@
-import { afterEach, describe, expect, it } from 'vitest';
-import { cleanup, render, screen } from '@testing-library/react';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { I18nProvider } from '../i18n';
+import { trackCtaClick } from '../analytics';
 import Services from './Services';
+
+vi.mock('../analytics', () => ({ trackCtaClick: vi.fn() }));
 
 // Design order, hardcoded so a reorder or dropped entry in data/services.tsx fails here.
 const EXPECTED_IDS = [
@@ -32,6 +35,7 @@ function renderServices() {
 afterEach(() => {
   cleanup();
   delete window.__INITIAL_STATE__;
+  vi.mocked(trackCtaClick).mockClear();
 });
 
 describe('Services', () => {
@@ -45,5 +49,15 @@ describe('Services', () => {
       .getAllByRole('link', { name: 'services_learn_more' })
       .map((a) => a.getAttribute('href'));
     expect(hrefs).toEqual(EXPECTED_IDS.map((id) => `/services/${id}`));
+  });
+
+  it('tracks a Learn more click with its service id', () => {
+    renderServices();
+
+    fireEvent.click(screen.getAllByRole('link', { name: 'services_learn_more' })[1]);
+
+    expect(trackCtaClick).toHaveBeenCalledExactlyOnceWith('services_learn_more', {
+      service_id: EXPECTED_IDS[1],
+    });
   });
 });
