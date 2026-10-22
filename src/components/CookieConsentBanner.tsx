@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useHref, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { useTranslation, LOCALE_PREFIXES, getLocaleFromPath } from "../i18n";
 import { Button } from "./ui/Button";
@@ -76,6 +76,9 @@ const Actions = styled.div`
 export default function CookieConsentBanner() {
   const { t } = useTranslation();
   const location = useLocation();
+  // Locale-prefixed via the router basename; a plain <a> keeps the full page
+  // load so PrivacyPolicy scrolls to #cookies.
+  const policyHref = useHref("/privacy#cookies");
   const [dismissed, setDismissed] = useState(() => readCookieConsent() !== null);
 
   if (dismissed || isPrivacyRoute(location.pathname)) {
@@ -96,7 +99,7 @@ export default function CookieConsentBanner() {
     <Wrapper>
       <Message>
         {t("cookie_banner_message")}{" "}
-        <PolicyLink href="/privacy#cookies">{t("cookie_banner_link")}</PolicyLink>
+        <PolicyLink href={policyHref}>{t("cookie_banner_link")}</PolicyLink>
       </Message>
       <Actions>
         <Button type="button" $variant="gradient" $padding="10px 24px" onClick={handleAccept}>
