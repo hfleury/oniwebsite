@@ -1,14 +1,18 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import { I18nProvider } from '../i18n';
 import Footer from './Footer';
 
-function renderFooter() {
+// basename mirrors main.tsx's BrowserRouter: '' for EN, '/pt' or '/sv' otherwise.
+function renderFooter(basename = '') {
   window.__INITIAL_STATE__ = {};
   return render(
-    <I18nProvider>
-      <Footer />
-    </I18nProvider>
+    <MemoryRouter basename={basename || undefined} initialEntries={[`${basename}/`]}>
+      <I18nProvider>
+        <Footer />
+      </I18nProvider>
+    </MemoryRouter>
   );
 }
 
@@ -40,13 +44,17 @@ describe('Footer', () => {
     ).toBeInTheDocument();
   });
 
-  it.each([
-    ['footer_legal_gdpr', '/privacy#gdpr'],
-    ['footer_legal_privacy_policy', '/privacy'],
-  ])('links %s to %s', (name, href) => {
-    renderFooter();
+  it.each(['', '/pt', '/sv'])('keeps the Legal links in the %s locale', (basename) => {
+    renderFooter(basename);
 
-    expect(screen.getByRole('link', { name })).toHaveAttribute('href', href);
+    expect(screen.getByRole('link', { name: 'footer_legal_gdpr' })).toHaveAttribute(
+      'href',
+      `${basename}/privacy#gdpr`
+    );
+    expect(screen.getByRole('link', { name: 'footer_legal_privacy_policy' })).toHaveAttribute(
+      'href',
+      `${basename}/privacy`
+    );
   });
 
   it('has only the two Legal links and no placeholder links', () => {
