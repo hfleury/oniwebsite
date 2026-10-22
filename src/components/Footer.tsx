@@ -1,6 +1,5 @@
 
 import styled from "styled-components";
-import { Facebook, Twitter, Instagram } from "lucide-react";
 import LanguageDropdown from "./LanguageDropdown";
 import { useTranslation } from "../i18n";
 import { colors, breakpoints } from "../styles/tokens";
@@ -134,34 +133,9 @@ const Copyright = styled.p`
   }
 `;
 
-const SocialLinks = styled.div`
-  display: flex;
-  margin-top: 24px;
-  
-  @media (min-width: ${breakpoints.md}) {
-    margin-top: 0;
-  }
-`;
-
-const SocialLink = styled.a`
-  cursor: pointer;
-  background-color: #F7FAFC;
-  color: ${colors.headingDark};
-  border-radius: 9999px;
-  padding: 8px;
-  margin-right: 16px;
-  transition: all 0.3s;
-  
-  &:last-child { margin-right: 0; }
-  
-  &:hover {
-    background-color: #EDF2F7;
-    color: ${colors.primary};
-  }
-`;
-
 export default function Footer() {
   const { t } = useTranslation();
+  const year = new Date().getFullYear();
 
   return (
     <Container>
@@ -169,64 +143,28 @@ export default function Footer() {
         <FiveColumns>
           <WideColumn>
             <LogoContainer>
-              <LogoText>Treact Inc.</LogoText>
+              <LogoText>Oni Web Officer</LogoText>
             </LogoContainer>
-            <Description>
-              Treact is an Inc. 5000 company, providing specific yet flexible React templates for building your next startup website.
-            </Description>
+            <Description>{t("footer_description")}</Description>
           </WideColumn>
           <Column>
-            <ColumnHeading>Main</ColumnHeading>
-            <LinkList>
-              <LinkListItem><Link href="#">Blog</Link></LinkListItem>
-              <LinkListItem><Link href="#">FAQs</Link></LinkListItem>
-              <LinkListItem><Link href="#">Support</Link></LinkListItem>
-              <LinkListItem><Link href="#">About Us</Link></LinkListItem>
-            </LinkList>
-          </Column>
-          <Column>
-            <ColumnHeading>Product</ColumnHeading>
-            <LinkList>
-              <LinkListItem><Link href="#">Log In</Link></LinkListItem>
-              <LinkListItem><Link href="#">Personal</Link></LinkListItem>
-              <LinkListItem><Link href="#">Business</Link></LinkListItem>
-              <LinkListItem><Link href="#">Team</Link></LinkListItem>
-            </LinkList>
-          </Column>
-          <Column>
-            <ColumnHeading>Press</ColumnHeading>
-            <LinkList>
-              <LinkListItem><Link href="#">Logos</Link></LinkListItem>
-              <LinkListItem><Link href="#">Events</Link></LinkListItem>
-              <LinkListItem><Link href="#">Stories</Link></LinkListItem>
-              <LinkListItem><Link href="#">Office</Link></LinkListItem>
-            </LinkList>
-          </Column>
-          <Column>
-            <ColumnHeading>Legal</ColumnHeading>
+            <ColumnHeading>{t("footer_legal_heading")}</ColumnHeading>
             <LinkList>
               <LinkListItem><Link href="/privacy#gdpr">{t("footer_legal_gdpr")}</Link></LinkListItem>
               <LinkListItem><Link href="/privacy">{t("footer_legal_privacy_policy")}</Link></LinkListItem>
-              <LinkListItem><Link href="#">Terms of Service</Link></LinkListItem>
-              <LinkListItem><Link href="#">Disclaimer</Link></LinkListItem>
             </LinkList>
           </Column>
         </FiveColumns>
         <Divider />
         <ThreeColBottom>
           <LogoBottom>
-            <h5 className="font-bold text-xl tracking-wider text-gray-100">Treact</h5>
+            <h5 className="font-bold text-xl tracking-wider text-gray-100">Oni Web Officer</h5>
           </LogoBottom>
           <Copyright>
-            &copy; 2026 Treact Inc. All Rights Reserved.
+            &copy; {year} Oni Web Officer. {t("footer_copyright")}
           </Copyright>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 mt-4 md:mt-0">
             <LanguageDropdown direction="up" className="text-gray-900 bg-gray-100 rounded-full border-none" />
-            <SocialLinks style={{ marginTop: 0 }}>
-              <SocialLink href="https://facebook.com"><Facebook size={20} /></SocialLink>
-              <SocialLink href="https://twitter.com"><Twitter size={20} /></SocialLink>
-              <SocialLink href="https://instagram.com"><Instagram size={20} /></SocialLink>
-            </SocialLinks>
           </div>
         </ThreeColBottom>
       </Content>
