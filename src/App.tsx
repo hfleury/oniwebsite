@@ -6,6 +6,9 @@ import Hero from "./components/Hero";
 import Services from "./components/Services";
 import Footer from "./components/Footer";
 import ServiceDetail from "./components/ServiceDetail";
+import CaseStudies from "./components/CaseStudies";
+import CaseStudiesIndex from "./components/CaseStudiesIndex";
+import CaseStudyDetail from "./components/CaseStudyDetail";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import CookieConsentBanner from "./components/CookieConsentBanner";
 
@@ -14,6 +17,7 @@ function HomePage() {
     <>
       <Hero />
       <Services />
+      <CaseStudies />
     </>
   );
 }
@@ -25,6 +29,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/services/:id" element={<ServiceDetail />} />
+        <Route path="/case-studies" element={<CaseStudiesIndex />} />
+        <Route path="/case-studies/:id" element={<CaseStudyDetail />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
       </Routes>
       <div className="mt-auto w-full">

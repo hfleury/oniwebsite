@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { useTranslation } from "../i18n";
-import { colors, breakpoints } from "../styles/tokens";
+import { colors } from "../styles/tokens";
 import { Container as BaseContainer } from "./ui/Section";
 import { Subheading, Heading } from "./ui/SectionHeading";
+import { BackLink } from "./ui/BackLink";
 import { services } from "../data/services";
 import GrowthCta from "./GrowthCta";
 
@@ -52,22 +53,6 @@ const TechItem = styled.li`
   color: ${colors.primary};
   font-weight: 600;
   font-size: 0.875rem;
-`;
-
-const BackLink = styled(Link)`
-  color: ${colors.primary};
-  font-weight: 600;
-  margin-top: 32px;
-  display: inline-block;
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
-
-  @media (min-width: ${breakpoints.md}) {
-    margin-top: 48px;
-  }
 `;
 
 export default function ServiceDetail() {
