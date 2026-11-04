@@ -3,7 +3,11 @@ import { getLocaleFromPath } from "./i18n";
 import { CONSENT_CHANGE_EVENT, readCookieConsent } from "./consent";
 import type { ConsentValue } from "./consent";
 
-export type CtaId = "hero_email" | "growth_mailto" | "services_learn_more";
+export type CtaId =
+  | "hero_email"
+  | "growth_mailto"
+  | "services_learn_more"
+  | "case_studies_read_more";
 
 let started = false;
 let client: PostHog | null = null;
