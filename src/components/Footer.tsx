@@ -1,5 +1,6 @@
 
 import styled from "styled-components";
+import { useHref } from "react-router-dom";
 import LanguageDropdown from "./LanguageDropdown";
 import { useTranslation } from "../i18n";
 import { colors, breakpoints } from "../styles/tokens";
@@ -136,6 +137,10 @@ const Copyright = styled.p`
 export default function Footer() {
   const { t } = useTranslation();
   const year = new Date().getFullYear();
+  // useHref prefixes the router's locale basename (/pt, /sv); a plain <a>
+  // keeps the full page load so PrivacyPolicy scrolls to the #anchor.
+  const gdprHref = useHref("/privacy#gdpr");
+  const privacyHref = useHref("/privacy");
 
   return (
     <Container>
@@ -150,8 +155,8 @@ export default function Footer() {
           <Column>
             <ColumnHeading>{t("footer_legal_heading")}</ColumnHeading>
             <LinkList>
-              <LinkListItem><Link href="/privacy#gdpr">{t("footer_legal_gdpr")}</Link></LinkListItem>
-              <LinkListItem><Link href="/privacy">{t("footer_legal_privacy_policy")}</Link></LinkListItem>
+              <LinkListItem><Link href={gdprHref}>{t("footer_legal_gdpr")}</Link></LinkListItem>
+              <LinkListItem><Link href={privacyHref}>{t("footer_legal_privacy_policy")}</Link></LinkListItem>
             </LinkList>
           </Column>
         </FiveColumns>
