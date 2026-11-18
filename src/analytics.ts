@@ -7,7 +7,8 @@ export type CtaId =
   | "hero_email"
   | "growth_mailto"
   | "services_learn_more"
-  | "case_studies_read_more";
+  | "case_studies_read_more"
+  | "header_cta";
 
 let started = false;
 let client: PostHog | null = null;
