@@ -14,7 +14,7 @@ function fixtureEntry(id: string, serviceId: string): CaseStudy {
   };
 }
 
-// Two entries for tests that mock data/caseStudies (the real registry ships empty).
+// Two entries for tests that mock data/caseStudies, so they don't depend on the real registry's content.
 export const FIXTURE_CASE_STUDIES: CaseStudy[] = [
   fixtureEntry('fixture-cloud-savings', 'cloud-devops'),
   fixtureEntry('fixture-ai-rollout', 'ai-engineering'),
