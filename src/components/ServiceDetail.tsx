@@ -30,6 +30,14 @@ const Text = styled.p`
   margin-top: 16px;
 `;
 
+const ProofPoint = styled.p`
+  margin-top: 12px;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: ${colors.bodyMuted};
+  overflow-wrap: break-word;
+`;
+
 const TechHeading = styled.h3`
   font-weight: 700;
   font-size: 1.25rem;
@@ -71,6 +79,7 @@ export default function ServiceDetail() {
         <Subheading>{t("services_section_subheading")}</Subheading>
         <Heading>{t(service.titleKey)}</Heading>
         <Text>{t(service.descriptionKey)}</Text>
+        {service.proofPointKey && <ProofPoint>{t(service.proofPointKey)}</ProofPoint>}
         <TechHeading>{t("services_technologies_heading")}</TechHeading>
         <TechList>
           {service.technologies.map((tech) => (

@@ -55,6 +55,25 @@ describe('ServiceDetail', () => {
     expect(cta.compareDocumentPosition(backLink) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 
+  it.each(['legacy-modernization', 'staff-augmentation'])(
+    'renders the proof point for %s between the description and the technologies',
+    (id) => {
+      renderAt(`/services/${id}`);
+
+      const description = screen.getByText(`${keyPrefix(id)}_description`);
+      const proofPoint = screen.getByText(`${keyPrefix(id)}_proof_point`);
+      const techHeading = screen.getByRole('heading', { level: 3, name: 'services_technologies_heading' });
+      expect(description.compareDocumentPosition(proofPoint) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+      expect(proofPoint.compareDocumentPosition(techHeading) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    }
+  );
+
+  it('renders no proof point for a service without one', () => {
+    renderAt('/services/cloud-devops');
+
+    expect(screen.queryByText(/_proof_point$/)).not.toBeInTheDocument();
+  });
+
   it('redirects an unknown id to /', () => {
     renderAt('/services/does-not-exist');
 

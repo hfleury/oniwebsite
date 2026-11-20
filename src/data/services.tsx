@@ -44,6 +44,7 @@ export const services: ServiceLine[] = [
     icon: <RefreshCw size={24} strokeWidth={2.5} />,
     titleKey: "services_legacy_modernization_title",
     descriptionKey: "services_legacy_modernization_description",
+    proofPointKey: "services_legacy_modernization_proof_point",
     technologies: ["Refactoring", "System Architecture", "Database Migration"],
   },
   {
