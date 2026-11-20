@@ -23,4 +23,14 @@ export const caseStudies: CaseStudy[] = [
     approachKey: "case_studies_cloud_cost_reduction_approach",
     resultKey: "case_studies_cloud_cost_reduction_result",
   },
+  {
+    id: "event-driven-marketplace",
+    serviceId: "enterprise-software",
+    titleKey: "case_studies_event_driven_marketplace_title",
+    summaryKey: "case_studies_event_driven_marketplace_summary",
+    contextKey: "case_studies_event_driven_marketplace_context",
+    problemKey: "case_studies_event_driven_marketplace_problem",
+    approachKey: "case_studies_event_driven_marketplace_approach",
+    resultKey: "case_studies_event_driven_marketplace_result",
+  },
 ];
