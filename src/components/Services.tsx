@@ -83,6 +83,7 @@ const ProofPoint = styled.p`
   margin-top: 8px;
   font-size: 0.875rem;
   color: ${colors.bodyMuted};
+  overflow-wrap: break-word;
 `;
 
 const LearnMoreLink = styled(Link)`
