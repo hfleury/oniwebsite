@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { I18nProvider } from '../i18n';
+import { profiles } from '../data/profiles';
 import Footer from './Footer';
 
 // basename mirrors main.tsx's BrowserRouter: '' for EN, '/pt' or '/sv' otherwise.
@@ -57,11 +58,29 @@ describe('Footer', () => {
     );
   });
 
-  it('has only the two Legal links and no placeholder links', () => {
+  it.each(['', '/pt', '/sv'])('links each profile in a new tab in the %s locale', (basename) => {
+    renderFooter(basename);
+
+    expect(screen.getByText('footer_follow_heading')).toBeInTheDocument();
+    profiles.forEach(({ name, url }) => {
+      // jsdom drops the space before the sr-only hint; browsers keep it.
+      const link = screen.getByRole('link', {
+        name: (accessibleName) =>
+          accessibleName.startsWith(name) && accessibleName.endsWith('footer_opens_new_tab'),
+      });
+      expect(link).toHaveAttribute('href', url);
+      expect(link).toHaveAttribute('target', '_blank');
+      expect(link.getAttribute('rel')?.split(' ')).toEqual(
+        expect.arrayContaining(['noopener', 'noreferrer'])
+      );
+    });
+  });
+
+  it('has only the Legal and profile links and no placeholder links', () => {
     renderFooter();
 
     const links = screen.getAllByRole('link');
-    expect(links).toHaveLength(2);
+    expect(links).toHaveLength(2 + profiles.length);
     links.forEach((link) => expect(link).not.toHaveAttribute('href', '#'));
   });
 });
