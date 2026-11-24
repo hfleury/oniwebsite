@@ -21,6 +21,10 @@ jobs:
         env:
           VITE_SENTRY_DSN: ${{ vars.VITE_SENTRY_DSN }}
           VITE_POSTHOG_KEY: ${{ vars.VITE_POSTHOG_KEY }}
+          # Only builds that deploy upload source maps to Sentry.
+          SENTRY_AUTH_TOKEN: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && secrets.SENTRY_AUTH_TOKEN || '' }}
+      - name: Check no source maps ship
+        run: '! find dist -name "*.map" | grep .'
       - run: npm test
       - if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: actions/upload-artifact@v4
