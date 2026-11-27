@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useHref } from "react-router-dom";
 import LanguageDropdown from "./LanguageDropdown";
 import { useTranslation } from "../i18n";
+import { profiles } from "../data/profiles";
 import { colors, breakpoints } from "../styles/tokens";
 import { Container as BaseContainer } from "./ui/Section";
 
@@ -157,6 +158,19 @@ export default function Footer() {
             <LinkList>
               <LinkListItem><Link href={gdprHref}>{t("footer_legal_gdpr")}</Link></LinkListItem>
               <LinkListItem><Link href={privacyHref}>{t("footer_legal_privacy_policy")}</Link></LinkListItem>
+            </LinkList>
+          </Column>
+          <Column>
+            <ColumnHeading>{t("footer_follow_heading")}</ColumnHeading>
+            <LinkList>
+              {profiles.map(({ name, url }) => (
+                <LinkListItem key={name}>
+                  <Link href={url} target="_blank" rel="noopener noreferrer">
+                    {name}
+                    <span className="sr-only"> {t("footer_opens_new_tab")}</span>
+                  </Link>
+                </LinkListItem>
+              ))}
             </LinkList>
           </Column>
         </FiveColumns>
