@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { useTranslation } from "../i18n";
-import { colors, breakpoints } from "../styles/tokens";
+import { colors } from "../styles/tokens";
 import { Container as BaseContainer } from "./ui/Section";
 import { Subheading, Heading } from "./ui/SectionHeading";
+import { BackLink } from "./ui/BackLink";
 import { services } from "../data/services";
 import GrowthCta from "./GrowthCta";
 
@@ -27,6 +28,14 @@ const Text = styled.p`
   line-height: 1.6;
   color: ${colors.bodyMuted};
   margin-top: 16px;
+`;
+
+const ProofPoint = styled.p`
+  margin-top: 12px;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: ${colors.bodyMuted};
+  overflow-wrap: break-word;
 `;
 
 const TechHeading = styled.h3`
@@ -54,22 +63,6 @@ const TechItem = styled.li`
   font-size: 0.875rem;
 `;
 
-const BackLink = styled(Link)`
-  color: ${colors.primary};
-  font-weight: 600;
-  margin-top: 32px;
-  display: inline-block;
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
-
-  @media (min-width: ${breakpoints.md}) {
-    margin-top: 48px;
-  }
-`;
-
 export default function ServiceDetail() {
   const { id } = useParams<{ id: string }>();
   const { t } = useTranslation();
@@ -86,6 +79,7 @@ export default function ServiceDetail() {
         <Subheading>{t("services_section_subheading")}</Subheading>
         <Heading>{t(service.titleKey)}</Heading>
         <Text>{t(service.descriptionKey)}</Text>
+        {service.proofPointKey && <ProofPoint>{t(service.proofPointKey)}</ProofPoint>}
         <TechHeading>{t("services_technologies_heading")}</TechHeading>
         <TechList>
           {service.technologies.map((tech) => (

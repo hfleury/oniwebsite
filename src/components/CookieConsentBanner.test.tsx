@@ -9,10 +9,10 @@ function clearConsentCookie() {
   document.cookie = 'cookie_consent=; Path=/; Max-Age=0';
 }
 
-function renderBanner(path = '/') {
+function renderBanner(path = '/', basename?: string) {
   window.__INITIAL_STATE__ = {};
   return render(
-    <MemoryRouter initialEntries={[path]}>
+    <MemoryRouter basename={basename} initialEntries={[path]}>
       <I18nProvider>
         <CookieConsentBanner />
       </I18nProvider>
@@ -39,6 +39,16 @@ describe('CookieConsentBanner', () => {
     expect(screen.getByText('cookie_banner_message')).toBeInTheDocument();
     expect(screen.getByText('cookie_banner_accept')).toBeInTheDocument();
     expect(screen.getByText('cookie_banner_reject')).toBeInTheDocument();
+  });
+
+  it.each([
+    ['/', '/privacy#cookies', undefined],
+    ['/pt/', '/pt/privacy#cookies', '/pt'],
+    ['/sv/', '/sv/privacy#cookies', '/sv'],
+  ])('on %s links the policy to %s', (path, href, basename) => {
+    renderBanner(path, basename);
+
+    expect(screen.getByRole('link', { name: 'cookie_banner_link' })).toHaveAttribute('href', href);
   });
 
   it('does not render when cookie_consent is already set', () => {
